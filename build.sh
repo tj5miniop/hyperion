@@ -16,11 +16,9 @@ RELEASE="$(rpm -E %fedora)"
 # Remove some GNOME apps, replace firefox with flatpak for more stability 
 rpm-ostree install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-rpm-ostree install zsh fzf
-flatpak install flathub org.mozilla.firefox
-flatpak install org.mozilla.Thunderbird
-flatpak install flathub io.github.dvlv.boxbuddyrs
-flatpak install flathub dev.vencord.Vesktop
+rpm-ostree install zsh fzf fastfetch gamescope
+
+curl --output-dir "/etc/skel/" --remote-name https://raw.githubusercontent.com/tj5miniop/hyperion/refs/heads/main/postsetup.sh
 
 #Install Icon Theme
 rpm-ostree install papirus-icon-theme breeze-cursor-theme
