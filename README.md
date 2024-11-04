@@ -2,3 +2,8 @@
 
 In the future - 
 I am hoping to migrate to COSMIC once bazzite has, or make GNOME perform Slightly better on Fedora 
+
+
+Changelog - 
+
+4/11/24 - Cannot find a way to install flatpaks during setup, adding postsetup.sh as a work around to run 
