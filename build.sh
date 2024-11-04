@@ -16,8 +16,7 @@ RELEASE="$(rpm -E %fedora)"
 # Remove some GNOME apps, replace firefox with flatpak for more stability 
 rpm-ostree install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-rpm-ostree override remove firefox
-rpm-ostree install firefox zsh fzf
+rpm-ostree install zsh fzf
 flatpak install flathub org.mozilla.firefox
 flatpak install org.mozilla.Thunderbird
 flatpak install flathub io.github.dvlv.boxbuddyrs
