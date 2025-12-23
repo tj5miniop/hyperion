@@ -25,10 +25,12 @@ modules:
     repos:
       copr:
         - bieszczaders/kernel-cachyos-addons
+        - wehagy/protonplus
     install:
       packages:
         - scx-scheds
         - scx-manager
+        - protonplus
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
