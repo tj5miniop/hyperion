@@ -78,7 +78,7 @@ cd /
 # Cleanup
 echo "-- running cleanup --"
 rm -rf /tmp/* /run/*
-rm -rf /{boot,home,root,srv,mnt,var,usr/local}
+rm -rf /{boot,home,root,srv,mnt,var,usr/local,opt}
 rm -rf /usr/lib/sysimage/{log,cache/pacman/pkg}
 rm -rf /{build,packages}
 # (re)create essential system directories
