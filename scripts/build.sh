@@ -56,14 +56,9 @@ dra download tj5miniop/linux-tkg --select "linux*"
 dra download tj5miniop/linux-tkg --select "*header*"
 pacman -U --noconfirm *.pkg*
 
-# XBOX Controller support
-pacman -Sy --noconfirm xone-dkms-git xpadneo-dkms
-
-# NVIDIA DRIVERS can be added here? 
-
 
 # KDE plasma
-pacman -Sy --noconfirm plasma-login plasma-desktop plasma-nm plasma-pa kscreen powerdevil power-profiles-daemon networkmanager
+pacman -Sy --noconfirm plasma-login-manager plasma-desktop plasma-nm plasma-pa kscreen powerdevil power-profiles-daemon networkmanager
 
 # systemd
 systemctl enable plasmalogin
@@ -73,8 +68,15 @@ systemctl enable NetworkManager
 KERNEL_VERSION="$(basename "$(find /usr/lib/modules -maxdepth 1 -type d | grep -v -E "\.img$" | tail -n 1)")"
 DRACUT_NO_XATTR=1 dracut --force --no-hostonly --reproducible --zstd --verbose --kver "$KERNEL_VERSION" "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
 
+# XBOX Controller support - put this after initramfs 
+pacman -Sy --noconfirm xone-dkms-git xpadneo-dkms
+# NVIDIA DRIVERS can be added here? 
+
+# Change dir to root - can this fix root unmounting issue?
+cd / 
+
 # Cleanup
-echo "running cleanup"
+echo "-- running cleanup --"
 rm -rf /tmp/* /run/*
 rm -rf /{boot,home,root,srv,mnt,var,usr/local}
 rm -rf /usr/lib/sysimage/{log,cache/pacman/pkg}
