@@ -72,6 +72,10 @@ DRACUT_NO_XATTR=1 dracut --force --no-hostonly --reproducible --zstd --verbose -
 pacman -Sy --noconfirm xone-dkms-git xpadneo-dkms
 # NVIDIA DRIVERS can be added here? 
 
+# Steam Deck Like configuration 
+pacman -Sy --noconfirm gamescope steamdeck-kde-presets
+
+
 # Change dir to root - can this fix root unmounting issue?
 cd / 
 
