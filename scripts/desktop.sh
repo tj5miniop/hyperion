@@ -19,9 +19,6 @@ sed -i \
     -e "/DownloadUser/d" \
     /etc/pacman.conf
 
-# Edit /etc/sudoers - allowing whell group members to run root commands via sudo
-echo "%wheel ALL=(ALL:ALL)" | tee -a /etc/sudoers
-
 # init keys
 pacman-key --init
 pacman-key --populate archlinux
@@ -78,8 +75,6 @@ pacman -Sy --noconfirm xone-dkms-git xpadneo-dkms
 # Steam Deck Like configuration 
 pacman -Sy --noconfirm gamescope steamdeck-kde-presets
 
-# Flatpak 
-pacman -Sy --noconfirm flatpak
 
 # Change dir to root - can this fix root unmounting issue?
 cd / 
