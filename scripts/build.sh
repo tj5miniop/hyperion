@@ -81,6 +81,22 @@ pacman -Sy --noconfirm gamescope steamdeck-kde-presets
 # Flatpak 
 pacman -Sy --noconfirm flatpak
 
+# install fish shell & utilities
+pacman -Sy fish micro nano vi 
+echo "SHELL=/bin/fish" >> /etc/default/useradd
+
+
+# FINAL initramfs
+#!/usr/bin/env bash
+# CREDIT GOES TO BOOTCREW
+set -xeuo pipefail
+mkdir -p /usr/lib/dracut/dracut.conf.d/
+printf "systemdsystemconfdir=/etc/systemd/system\nsystemdsystemunitdir=/usr/lib/systemd/system\n" | tee /usr/lib/dracut/dracut.conf.d/30-bootcrew-fix-bootc-module.conf
+printf 'reproducible=yes\nhostonly=no\ncompress=zstd\nadd_dracutmodules+=" bootc "' | tee "/usr/lib/dracut/dracut.conf.d/30-bootcrew-bootc-container-build.conf"
+dracut --force "$(find /usr/lib/modules -maxdepth 1 -type d | grep -v -E "*.img" | tail -n 1)/initramfs.img"
+
+
+# FS tweaks
 # Change dir to root - can this fix root unmounting issue?
 cd / 
 
