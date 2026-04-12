@@ -82,7 +82,7 @@ pacman -Sy --noconfirm gamescope steamdeck-kde-presets
 pacman -Sy --noconfirm flatpak
 
 # install fish shell & utilities
-pacman -Sy fish micro nano vi 
+pacman -Sy --noconfirm fish micro nano vi 
 echo "SHELL=/bin/fish" >> /etc/default/useradd
 
 
