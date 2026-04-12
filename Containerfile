@@ -1,11 +1,11 @@
 FROM ghcr.io/tj5miniop/hyperion-ci as hyperion-bootc
-COPY ../scripts/ /tmp 
+COPY ../scripts/ /tmp/scripts 
 
 # run build.sh script 
 
 USER root
-WORKDIR /tmp 
-RUN chmod +x build.sh && \
+WORKDIR /tmp/scripts
+RUN chmod +x /tmp/scripts/*.sh && \
     bash build.sh && \
     bash initramfs.sh && \ 
     bash shell.sh
