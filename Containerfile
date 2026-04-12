@@ -6,9 +6,7 @@ COPY ../scripts/ /tmp/scripts
 USER root
 WORKDIR /tmp/scripts
 RUN chmod +x /tmp/scripts/*.sh && \
-    bash build.sh && \
-    bash initramfs.sh && \ 
-    bash shell.sh
+    bash build.sh
 
 LABEL containers.bootc=1
 RUN bootc container lint
