@@ -39,6 +39,8 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh && \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
+    /ctx/os-release.sh && \
+    /ctx/initramfs.sh && \
     echo "--- Build Complete ---"
 ### LINTING
 ## Verify final image and contents are correct.
