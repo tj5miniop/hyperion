@@ -1,0 +1,3 @@
+#!/bin/bash
+# DOES NOT GET CALLED IN SCRIPT - THIS IS ONLY FOR HOUSEKEEPING
+chmod +x *.sh

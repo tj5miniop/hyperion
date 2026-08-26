@@ -33,12 +33,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build.sh && /
-    /ctx/akmods.sh &&
+    /ctx/build.sh && \
+    /ctx/akmods.sh && \
+    /ctx/nvidia.sh && \
     echo "--- Build Complete ---"
-
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
