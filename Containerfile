@@ -5,7 +5,8 @@ ARG ARCH="${ARCH:-x86_64}"
 
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
-ARG KERNEL_VERSION="${KERNEL_VERSION:-7.0.9-ogc3.2.fc${FEDORA_VERSION}.${ARCH}}"
+# For the KERNEL VERSION, PLEASE REFER TO THIS REPO - 
+ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.0-ogc6.1.fc${FEDORA_VERSION}.${ARCH}}"
 ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
 # Allow build scripts to be referenced without being copied into the final image
