@@ -23,8 +23,14 @@ FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}
 # -- Base Image - code adapted from Bazzite ---
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
 
+# --- Intro Text ---
+
+
+
+
+
 # Make OPT immutable to allow for Zen browser and extra packages to work
-RUN rm /opt && mkdir /opt
+RUN echo "--- make OPT immutable temporarily ---" && rm /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -51,6 +57,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 
 
 # Logic to make OPT back to be mutable in the image
+RUN echo "-- Reverting OPT changes ---"
 RUN set -euo pipefail && \
     if [ -d /opt ] && [ -d /var/opt ]; then \
         # Merge /opt into /var/opt
