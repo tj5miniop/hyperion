@@ -30,8 +30,8 @@
 - **[Bazzite](https://bazzite.gg)**  
   The initial inspiration for this project, also serves as a great reference
 
-- **Open Gaming Collective**  
-  Creating the OGC kernel, which is used in this system
+- **[Open Gaming Collective](https://opengamingcollective.org/)**  
+  Creating the [OGC kernel](https://github.com/OpenGamingCollective/linux), which is used in this system - along with other utilities such as [ScopeBuddy](https://github.com/OpenGamingCollective/ScopeBuddy) and [Cardwire](https://github.com/OpenGamingCollective/cardwire)
 
 ---
 

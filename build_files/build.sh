@@ -30,7 +30,7 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam heroic-games-launcher protonplus protontricks
+dnf -y install steam heroic-games-launcher protonplus protontricks cardwire
 
 
 # Install Virtualisation Tools
