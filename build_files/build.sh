@@ -17,7 +17,8 @@ dnf copr enable ublue-os/packages
 
 # Remove certain bundled packages
 dnf -y remove \
-    firefox
+    firefox \
+    konsole \
 
 # Enable Terra repo
 dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
@@ -26,7 +27,7 @@ dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/ter
 dnf -y install terra-release-extras
 
 # Install packages
-dnf -y install steam heroic-games-launcher protonplus flatpak protontricks
+dnf -y install steam heroic-games-launcher protonplus flatpak protontricks ghostty codium
 
 # AppImage Support rework
 dnf -y install fuse fuse3
