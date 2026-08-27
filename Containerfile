@@ -40,6 +40,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
     /ctx/os-release.sh && \
+    cp -r /ctx/system_files/usr/share/wallpapers/wallpaper.png /usr/share/wallpapers/
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete ---"
