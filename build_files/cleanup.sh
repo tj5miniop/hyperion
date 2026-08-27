@@ -64,4 +64,7 @@ rm -rf \
     /etc/gshadow- \
     /etc/subuid- \
     /etc/subgid- \
+    /run/dnf/* \
+    /run/selinux-policy/* \
+
 
