@@ -1,11 +1,11 @@
-# Build Arguments 
+# --- Build Arguments ---
 ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
-# For the KERNEL VERSION, PLEASE REFER TO THIS REPO - 
+# For the exact kernel version, use the kernel-version-checker script included in the image
 ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.0-ogc6.1.fc${FEDORA_VERSION}.${ARCH}}"
 ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
@@ -14,18 +14,17 @@ FROM scratch AS ctx
 COPY build_files /
 COPY system_files /system_files
 
-# Grab AKMODS
+# --- Grab AKMODS ---
 FROM ghcr.io/ublue-os/akmods:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods
 FROM ghcr.io/ublue-os/akmods-extra:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods-extra
 FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods-nvidia
 
 
-# Base Image - code adapted from Bazzite
+# -- Base Image - code adapted from Bazzite ---
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN rm /opt && mkdir /opt
-
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -48,8 +47,11 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     cp -r /ctx/system_files/usr/share/wallpapers/wallpaper.png /usr/share/wallpapers/ && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
-    # Logic to make OPT back to be mutable in the image
-    RUN set -euo pipefail && \
+    echo "--- Build Complete ---"
+
+
+# Logic to make OPT back to be mutable in the image
+RUN set -euo pipefail && \
     if [ -d /opt ] && [ -d /var/opt ]; then \
         # Merge /opt into /var/opt
         cp -a /opt/. /var/opt/; \
@@ -61,7 +63,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     fi && \
     # Create the symbolic link pointing /opt to /var/opt
     ln -s /var/opt /opt
-    echo "--- Build Complete ---"
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
