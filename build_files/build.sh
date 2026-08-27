@@ -28,10 +28,5 @@ dnf -y install terra-release-extras
 # Install packages
 dnf -y install steam heroic-games-launcher protonplus flatpak protontricks
 
-# install zen browser
-dnf -y copr enable sneexy/zen-browser
-dnf -y install zen-browser
-dnf -y copr disable sneexy/zen-browser
-
 # AppImage Support rework
 dnf -y install fuse fuse3
