@@ -66,5 +66,6 @@ rm -rf \
     /etc/subgid- \
     /run/dnf \
     /run/selinux-policy \
+    /run/setrans \
 
 
