@@ -40,6 +40,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
     /ctx/os-release.sh && \
+    /ctx/cleanup.sh && \
     /ctx/initramfs.sh && \
     echo "--- Build Complete ---"
 ### LINTING
