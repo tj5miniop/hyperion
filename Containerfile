@@ -22,6 +22,11 @@ FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}
 
 # Base Image - code adapted from Bazzite
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
+
+# Make OPT immutable to allow for Zen browser and extra packages to work
+RUN rm /opt && mkdir /opt
+
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -43,6 +48,19 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     cp -r /ctx/system_files/usr/share/wallpapers/wallpaper.png /usr/share/wallpapers/ && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
+    # Logic to make OPT back to be mutable in the image
+    RUN set -euo pipefail && \
+    if [ -d /opt ] && [ -d /var/opt ]; then \
+        # Merge /opt into /var/opt
+        cp -a /opt/. /var/opt/; \
+        # Remove the old /opt directory
+        rm -rf /opt; \
+    elif [ -d /opt ] && [ ! -e /var/opt ]; then \
+        # If /var/opt doesn't exist yet, simply move /opt there\
+        mv /opt /var/opt; \
+    fi && \
+    # Create the symbolic link pointing /opt to /var/opt
+    ln -s /var/opt /opt
     echo "--- Build Complete ---"
 ### LINTING
 ## Verify final image and contents are correct.
