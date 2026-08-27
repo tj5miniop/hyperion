@@ -52,7 +52,7 @@ dnf -y install fuse fuse3
 # ----------------------------
 
 # podman
-systemctl enable podman.sockety
+systemctl enable podman.socket
 
 # libvirtd
 systemctl enable libvirtd
