@@ -27,7 +27,7 @@ dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/ter
 dnf -y install terra-release-extras
 
 # Install packages
-dnf -y install steam heroic-games-launcher protonplus flatpak protontricks ghostty codium equibop
+dnf -y install steam heroic-games-launcher protonplus flatpak protontricks ghostty codium equibop vlc
 
 # AppImage Support rework
 dnf -y install fuse fuse3
