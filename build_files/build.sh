@@ -65,7 +65,8 @@ dnf5 -y install papirus-icon-theme
 # ---- Copy System Files -----
 # ----------------------------
 # Copy all files to root directory
-cp -r /ctx/system_files/ /
+cp -r /ctx/system_files/etc /etc
+cp -r /ctx/system_files/usr /usr
 
 # ----------------------------
 # -------- SystemD -----------
