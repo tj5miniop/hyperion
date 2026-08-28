@@ -26,11 +26,10 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
 # --- Intro Text ---
 
 RUN echo "H   H Y   Y PPPP  EEEEE RRRR  III  OOO  N   N 
-H   H  Y Y  P   P E     R   R  I  O   O NN  N 
-HHHHH   Y   PPPP  EEEE  RRRR   I  O   O N N N 
-H   H   Y   P     E     R  R   I  O   O N  NN 
-H   H   Y   P     EEEEE R   R III  OOO  N   N 
-                                              "                          
+	H   H  Y Y  P   P E     R   R  I  O   O NN  N 
+	HHHHH   Y   PPPP  EEEE  RRRR   I  O   O N N N 
+	H   H   Y   P     E     R  R   I  O   O N  NN 
+	H   H   Y   P     EEEEE R   R III  OOO  N   N"                          
 RUN echo "---- made by Tj5miniop ---" && \
 	echo " " 
 
