@@ -61,15 +61,11 @@ dnf -y install fuse fuse3
 # Papirus Icons
 dnf5 -y install papirus-icon-theme
 
-# Copy wallpapers 
-cp -r /ctx/system_files/usr/share/wallpapers/Hyperion-2026-08.png /usr/share/wallpapers/ 
-
-# Copy Icons
-cp -r /ctx/system_files/usr/share/icons/*.png /usr/share/icons/
-
-# Plymouth Theme - WIP
-
-
+# ----------------------------
+# ---- Copy System Files -----
+# ----------------------------
+# Copy all files to root directory
+cp -r /ctx/system_files/ /
 
 # ----------------------------
 # -------- SystemD -----------
