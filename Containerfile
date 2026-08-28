@@ -57,19 +57,19 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 
 
 # Logic to make OPT back to be mutable in the image
-RUN echo "-- Reverting OPT changes ---"
-RUN set -euo pipefail && \
-    if [ -d /opt ] && [ -d /var/opt ]; then \
-        # Merge /opt into /var/opt
-        cp -a /opt/. /var/opt/; \
-        # Remove the old /opt directory
-        rm -rf /opt; \
-    elif [ -d /opt ] && [ ! -e /var/opt ]; then \
-        # If /var/opt doesn't exist yet, simply move /opt there\
-        mv /opt /var/opt; \
-    fi && \
-    # Create the symbolic link pointing /opt to /var/opt
-    ln -s /var/opt /opt
+# RUN echo "-- Reverting OPT changes ---"
+# RUN set -euo pipefail && \
+#    if [ -d /opt ] && [ -d /var/opt ]; then \
+#        # Merge /opt into /var/opt
+#        cp -a /opt/. /var/opt/; \
+#        # Remove the old /opt directory
+#        rm -rf /opt; \
+#    elif [ -d /opt ] && [ ! -e /var/opt ]; then \
+#        # If /var/opt doesn't exist yet, simply move /opt there\
+#        mv /opt /var/opt; \
+#    fi && \
+#    # Create the symbolic link pointing /opt to /var/opt
+#    ln -s /var/opt /opt
 
 ### LINTING
 ## Verify final image and contents are correct.
