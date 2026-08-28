@@ -9,8 +9,6 @@ echo "
 | | || / /  |  __/|  /_ |    /| || \_/|| | \||
 \_/ \|/_/   \_/   \____\\_/\_\\_/\____/\_/  \|
 "
-
-
 # ----------------------------
 # -------- DNF Stuff ---------
 # ----------------------------
@@ -35,7 +33,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox
+dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfetch
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
@@ -55,6 +53,23 @@ dnf -y copr disable sneexy/zen-browser
 
 # AppImage Support rework
 dnf -y install fuse fuse3
+
+# ----------------------------
+# -------- Theming -----------
+# ----------------------------
+# This section of the script does not directly set up the dotfiles but will install all dependencies
+# Papirus Icons
+dnf5 -y install papirus-icon-theme
+
+# Copy wallpapers 
+cp -r /ctx/system_files/usr/share/wallpapers/Hyperion-2026-08.png /usr/share/wallpapers/ 
+
+# Copy Icons
+cp -r /ctx/system_files/usr/share/icons/*.png /usr/share/icons/
+
+# Plymouth Theme - WIP
+
+
 
 # ----------------------------
 # -------- SystemD -----------
