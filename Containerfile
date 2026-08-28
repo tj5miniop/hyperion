@@ -23,19 +23,10 @@ FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}
 # -- Base Image - code adapted from Bazzite ---
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
 
-# --- Intro Text ---
-
-RUN echo "H   H Y   Y PPPP  EEEEE RRRR  III  OOO  N   N 
-	H   H  Y Y  P   P E     R   R  I  O   O NN  N 
-	HHHHH   Y   PPPP  EEEE  RRRR   I  O   O N N N 
-	H   H   Y   P     E     R  R   I  O   O N  NN 
-	H   H   Y   P     EEEEE R   R III  OOO  N   N"                          
-RUN echo "---- made by Tj5miniop ---" && \
-	echo " " 
 
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
-RUN echo "--- make OPT immutable temporarily ---" && rm /opt && mkdir /opt
+RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
