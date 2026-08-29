@@ -71,12 +71,19 @@ cp -avf "/ctx/system_files"/. /
 # ---------------------------
 # - Copy First Setup Script -
 # ---------------------------
+SETUP_DIR="/tmp/hyperion/setup"
+GIT_REPO_SETUP="https://github.com/tj5miniop/hyperion-first-setup"
+DEST_DIR="/usr/share/hyperion-setup"
 
-SETUP_DIR=/tmp/hyperion/setup
-GIT_REPO_SETUP=https://github.com/tj5miniop/hyperion-first-setup
-mkdir -p $SETUP_DIR && cd $SETUP_DIR
-git clone $GIT_REPO_SETUP && cd hyperion-first-setup/setup
-mkdir -p /usr/share/hyperion-setup && cp setup/. /usr/share/hyperion-setup/.
+# clone git repo 
+mkdir -p "$SETUP_DIR"
+cd "$SETUP_DIR"
+git clone "$GIT_REPO_SETUP" hyperion-first-setup
+cd hyperion-first-setup
+
+# Copy directory contents safely
+mkdir -p "$DEST_DIR"
+cp -a setup/. "$DEST_DIR/"
 
 
 # ---------------------------
