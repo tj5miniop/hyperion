@@ -33,7 +33,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility
+dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility uv git
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
@@ -54,9 +54,9 @@ dnf -y copr disable sneexy/zen-browser
 # AppImage Support rework
 dnf -y install fuse fuse3
 
-# ----------------------------
-# -------- Theming -----------
-# ----------------------------
+# ---------------------------
+# ------- Theming -----------
+# ---------------------------
 # This section of the script does not directly set up the dotfiles but will install all dependencies
 # Papirus Icons
 dnf5 -y install papirus-icon-theme
@@ -67,12 +67,25 @@ dnf5 -y install papirus-icon-theme
 # Copy all files to root directory
 cp -avf "/ctx/system_files"/. /
 
-# ----------------------------
-# -------- SystemD -----------
-# ----------------------------
+
+# ---------------------------
+# - Copy First Setup Script -
+# ---------------------------
+
+SETUP_DIR=/tmp/hyperion/setup
+GIT_REPO_SETUP=https://github.com/tj5miniop/hyperion-first-setup
+mkdir -p $SETUP_DIR && cd $SETUP_DIR
+git clone $GIT_REPO_SETUP && cd hyperion-first-setup/setup
+mkdir -p /usr/share/hyperion-setup && cp setup/. /usr/share/hyperion-setup/.
+
+
+# ---------------------------
+# ------- SystemD ----------=
+# ---------------------------
 
 # podman
 systemctl enable podman.socket
 
 # libvirtd
 systemctl enable libvirtd
+

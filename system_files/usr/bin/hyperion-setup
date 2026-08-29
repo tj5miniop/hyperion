@@ -1,0 +1,4 @@
+#!/bin/bash 
+
+# Run setup script
+uv run /usr/share/hyperion-setup/main.py
