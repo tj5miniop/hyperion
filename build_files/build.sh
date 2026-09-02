@@ -19,6 +19,10 @@ dnf -y copr enable ublue-os/packages
 dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev
 dnf copr enable ublue-os/packages
 
+# Installing SElinux-Fixes
+echo "--- installing SELINUX FIXES... ---"
+dnf -y install selinux-policy-targeted
+
 # Remove certain bundled packages
 echo " --- Removing certain native packages... ---"
 dnf -y remove \
