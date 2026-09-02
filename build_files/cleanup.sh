@@ -2,6 +2,7 @@
 set -eoux pipefail
 
 rm -rf /tmp/* || true
+rm -rf /run/* || true
 rm -rf /var/log/dnf5.log || true
 rm -rf /boot/* || true
 rm -rf /boot/.* || true
@@ -64,8 +65,5 @@ rm -rf \
     /etc/gshadow- \
     /etc/subuid- \
     /etc/subgid- \
-    /run/dnf \
-    /run/selinux-policy \
-    /run/setrans \
 
 
