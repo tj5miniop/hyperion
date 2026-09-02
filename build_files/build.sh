@@ -41,7 +41,7 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfe
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam heroic-games-launcher protonplus protontricks
+dnf -y install steam protonplus protontricks
 
 
 # Install Virtualisation Tools
@@ -88,6 +88,26 @@ cd hyperion-first-setup
 # Copy directory contents safely
 mkdir -p "$DEST_DIR"
 cp -a setup/. "$DEST_DIR/"
+
+# ----------------------------
+# --- Install misc RPMs ------
+# ----------------------------
+
+# Disclaimer
+# HYDRA Launcher is installed here, as it's one of the best "one-stop-shop" game launchers I can find for Linux (essentially like playnite)
+#It has some piracy-related features just to be aware - I am distributing this as part of hyperion NOT for anything related to piracy
+HEROIC_VER=2.22.1
+HYDRA_VER=4.1.2
+FAUGUS_VER=2.2.1
+DIR_RPMS=/tmp/local-rpms/
+mkdir -p $DIR_RPMS
+cd "$DIR_RPMS" || exit 1
+
+curl -L https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v$HEROIC_VER/Heroic-$HEROIC_VER-linux-x86_64.rpm --output heroic.rpm
+curl -L https://github.com/hydralauncher/hydra/releases/download/v$HYDRA_VER/hydralauncher-$HYDRA_VER.x86_64.rpm --output hydra.rpm
+curl -L https://github.com/Faugus/faugus-launcher/releases/download/$FAUGUS_VER/faugus-launcher-$FAUGUS_VER-1.fc44.noarch.rpm --output faugus.rpm
+
+dnf -y install ./*.rpm --allowerasing
 
 
 # ---------------------------
