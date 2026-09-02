@@ -1,4 +1,6 @@
 #!/bin/bash 
 
-# Run setup script
-uv run /usr/share/hyperion-setup/main.py
+# Copy setup script to home folder
+mkdir -p ~/hyperion-setup
+cp -r /usr/share/hyperion-setup/ ~/hyperion-setup
+uv run ~/hyperion-setup/main.py
