@@ -41,7 +41,7 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfe
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam protonplus protontricks
+dnf -y install steam protonplus protontricks gamemode 
 
 
 # Install Virtualisation Tools
@@ -96,9 +96,9 @@ cp -a setup/. "$DEST_DIR/"
 # Disclaimer
 # HYDRA Launcher is installed here, as it's one of the best "one-stop-shop" game launchers I can find for Linux (essentially like playnite)
 #It has some piracy-related features just to be aware - I am distributing this as part of hyperion NOT for anything related to piracy
-HEROIC_VER=2.22.1
-HYDRA_VER=4.1.2
-FAUGUS_VER=2.2.1
+HEROIC_VER=2.22.1 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
+HYDRA_VER=4.1.2 # Source https://github.com/hydralauncher/hydra/
+FAUGUS_VER=2.2.1 # Source https://github.com/Faugus/faugus-launcher
 DIR_RPMS=/tmp/local-rpms/
 mkdir -p $DIR_RPMS
 cd "$DIR_RPMS" || exit 1
