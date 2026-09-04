@@ -1,8 +1,6 @@
 # Hyperion
 
 
-# WARNING - THIS BRANCH IS NOT THE MAIN BRANCH - THEREFORE ANY CODE PUBLISHED HERE WILL NOT BE ADDED TO THE MAIN IMAGES UNTIL PUBLISHED
-
 
 ![Hyperion Logo](https://raw.githubusercontent.com/tj5miniop/hyperion/refs/heads/main/branding/hyperion-logo.png)
 
