@@ -65,7 +65,6 @@ RUN bootc container lint
 # hyperion-nvidia - Add the NVIDIA DRIVERS
 # ---
 FROM hyperion AS hyperion-nvidia
-
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -73,6 +72,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/nvidia.sh && \
     /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion-nvidia ---"
 
@@ -89,6 +89,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/asus.sh && \
     /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion-asus ---"
 

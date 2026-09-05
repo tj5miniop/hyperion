@@ -93,7 +93,7 @@ sudoif command *args:
 #
 
 # Build the image using the specified parameters
-build $target_image=image_name $tag=default_tag:
+build $target_image=image_name $tag=default_tag $containerfile_target=target_image:
     #!/usr/bin/env bash
 
     set -euox pipefail
