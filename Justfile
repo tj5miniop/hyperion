@@ -80,16 +80,18 @@ sudoif command *args:
 # Arguments:
 #   $target_image - The tag you want to apply to the image (default: $image_name).
 #   $tag - The tag for the image (default: $default_tag).
+#   $containerfile_target - The Containerfile stage to build (default: $target_image).
 #
 # The script constructs the version string using the tag and the current date.
 # If the git working directory is clean, it also includes the short SHA of the current HEAD.
 #
-# just build $target_image $tag
+# just build $target_image $tag $containerfile_target
 #
 # Example usage:
-#   just build myimage mytag
+#   just build hyperion-nvidia latest hyperion-nvidia
 #
-# This will build an image 'myimage:mytag'
+# This will build the "hyperion-nvidia" Containerfile stage and tag it as
+# 'hyperion-nvidia:latest'
 #
 
 # Build the image using the specified parameters
@@ -118,12 +120,13 @@ build $target_image=image_name $tag=default_tag $containerfile_target=target_ima
     LABELS+=("--label" "io.artifacthub.package.prerelease=false")
     LABELS+=("--label" "org.opencontainers.image.created=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)")
     LABELS+=("--label" "org.opencontainers.image.description={{ image_desc }}")
-    LABELS+=("--label" "org.opencontainers.image.title={{ image_name }}")
+    LABELS+=("--label" "org.opencontainers.image.title=${target_image}")
     LABELS+=("--label" "org.opencontainers.image.vendor={{ repo_organization }}")
 
     # This actually builds the image!
-    PODMAN_BUILD_ARGS=("${BUILD_ARGS[@]}" "${LABELS[@]}" --pull=newer --tag "${target_image}:${tag}" --file Containerfile)
+    PODMAN_BUILD_ARGS=("${BUILD_ARGS[@]}" "${LABELS[@]}" --pull=newer --tag "${target_image}:${tag}" --target "${containerfile_target}" --file Containerfile)
 
+    echo "--- podman build args: ${PODMAN_BUILD_ARGS[*]} ---"
     podman build "${PODMAN_BUILD_ARGS[@]}" .
 
 # Split the image for smaller updates (New)!
