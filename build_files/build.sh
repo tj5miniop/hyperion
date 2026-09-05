@@ -54,6 +54,11 @@ dnf -y copr enable sneexy/zen-browser
 dnf -y install zen-browser
 dnf -y copr disable sneexy/zen-browser
 
+# Installing CachyOS addons 
+dnf -y copr enable bieszczaders/kernel-cachyos-addons
+dnf -y swap zram-generator-defaults cachyos-settings
+dnf -y install scx-manager scx-scheds scx-tools
+dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
 # AppImage Support rework
 dnf -y install fuse fuse3
@@ -119,4 +124,3 @@ systemctl enable podman.socket
 
 # libvirtd
 systemctl enable libvirtd
-
