@@ -2,7 +2,7 @@
 set -eoux pipefail
 
 # set os-release vars 
-IMAGE_PRETTY_NAME="Hyperion"
+IMAGE_PRETTY_NAME="Hyperion Linux"
 BASE_IMAGE_NAME="hyperion"
 IMAGE_NAME="hyperion"
 FEDORA_VERSION="44"

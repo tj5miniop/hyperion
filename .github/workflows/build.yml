@@ -24,6 +24,22 @@ jobs:
   build_push:
     name: Build and push image
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image_flavour: main
+            image_suffix: ""
+            containerfile_target: hyperion
+            rechunk: true
+          - image_flavour: nvidia
+            image_suffix: "-nvidia"
+            containerfile_target: hyperion-nvidia
+            rechunk: false
+          - image_flavour: asus
+            image_suffix: "-asus"
+            containerfile_target: hyperion-asus
+            rechunk: false        
 
     permissions:
       contents: read
@@ -49,9 +65,9 @@ jobs:
       - name: Image Name
         id: image-name
         run: |
-          IMAGE_NAME=$(just image_name)
-
-          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+          BASE_IMAGE_NAME=$(just image_name)
+          IMAGE_NAME="${BASE_IMAGE_NAME}${{ matrix.image_suffix}}"
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV 
 
       - name: Default Tag
         id: gen-default-tag
@@ -70,13 +86,12 @@ jobs:
       - name: Build Image
         id: build-image
         run: |
-          just build \
-            ${IMAGE_NAME} \
-            ${DEFAULT_TAG}
+          just build ${IMAGE_NAME} ${DEFAULT_TAG} ${{ matrix.containerfile_target}}
 
       # This is optional, this provides smaller delta updates
       - name: Rechunk with rpm-ostree
         id: rechunk
+        if: matrix.rechunk
         run: |
           just ostree-rechunk \
             ${IMAGE_NAME} \
