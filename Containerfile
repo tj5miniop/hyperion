@@ -27,6 +27,9 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
+# Set image type variable for os-release
+RUN container_image_name="Hyperion (Standard Image)"
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -66,6 +69,9 @@ RUN bootc container lint
 # ---
 FROM hyperion AS hyperion-nvidia
 
+# Set image type variable for os-release
+RUN container_image_name="Hyperion (NVIDIA OPEN DRIVER PACKAGED RELEASE)"
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -73,6 +79,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/nvidia.sh && \
     /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion-nvidia ---"
 
@@ -83,12 +90,17 @@ RUN bootc container lint
 # hyperion-asus - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image.
 # ---
 FROM hyperion AS hyperion-asus
+
+# Set image type variable for os-release
+RUN container_image_name="Hyperion (Asus Tailored/ HTPC image)"
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/asus.sh && \
     /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion-asus ---"
 
