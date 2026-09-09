@@ -8,3 +8,7 @@ systemctl enable asusd.service
 systemctl enable asus-shutdown.service
 
 echo " --- Asus CTL added ---"
+
+# Install ASUS specific files
+# Copy all files to root directory
+cp -avf "/ctx/system_files/shared/asus"/. /

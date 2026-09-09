@@ -82,7 +82,7 @@ dnf5 -y install papirus-icon-theme
 # ---- Copy System Files -----
 # ----------------------------
 # Copy all files to root directory
-cp -avf "/ctx/system_files"/. /
+cp -avf "/ctx/system_files/shared"/. /
 
 
 # ---------------------------
