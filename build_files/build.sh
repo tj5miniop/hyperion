@@ -42,7 +42,7 @@ dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch gno
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode 
-dnf -y install powerbuttond wooting-udev-rules 8bitdo-udev-rules inputplumber
+dnf -y install powerbuttond inputplumber
 dnf -y install gamescope-session gamescope-session-ogui-steam gamescope steamos-manager steam-notif-daemon 
 
 #echo "--- installing ds-inhibit ---"
