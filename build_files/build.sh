@@ -43,9 +43,9 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfe
 echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode 
 
-echo "--- installing ds-inhibit ---"
+#echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite 
-dnf -y install ds-inhbit
+dnf -y install ds-inhibit
 dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
@@ -128,6 +128,7 @@ systemctl enable podman.socket
 
 # libvirtd
 systemctl enable libvirtd
+
 
 # ds-inhbit
 systemctl enable ds-inhibit
