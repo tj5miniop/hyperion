@@ -42,6 +42,8 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfe
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode 
+dnf -y install powerbuttond wooting-udev-rules 8bitdo-udev-rules input plumber
+dnf -y install gamescope-session gamescope-session-ogui-steam gamescope
 
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite 
@@ -61,6 +63,8 @@ dnf -y copr disable sneexy/zen-browser
 # Installing CachyOS addons 
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
 dnf -y swap zram-generator-defaults cachyos-settings
+# Install certain dependencies 
+dnf -y install power-profiles-daemon
 dnf -y install scx-manager scx-scheds scx-tools
 dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
