@@ -64,7 +64,7 @@ dnf -y copr disable sneexy/zen-browser
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
 dnf -y swap zram-generator-defaults cachyos-settings
 # Install certain dependencies 
-dnf -y install power-profiles-daemon
+dnf -y install power-profiles-daemon --allowerasing
 dnf -y install scx-manager scx-scheds scx-tools
 dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
