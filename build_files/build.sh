@@ -37,7 +37,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility uv git
+dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility uv git
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
