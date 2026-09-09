@@ -42,8 +42,8 @@ dnf -y install ghostty codium equibop vlc ffmpeg flatpak podman distrobox fastfe
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode 
-dnf -y install powerbuttond wooting-udev-rules 8bitdo-udev-rules input plumber
-dnf -y install gamescope-session gamescope-session-ogui-steam gamescope
+dnf -y install powerbuttond wooting-udev-rules 8bitdo-udev-rules inputplumber
+dnf -y install gamescope-session gamescope-session-ogui-steam gamescope steamos-manager steam-notif-daemon 
 
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite 

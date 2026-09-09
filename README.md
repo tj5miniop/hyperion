@@ -21,6 +21,7 @@
 - Optimized for gaming performance
 - AI/ML and 3D application support (These apps aren't installed by default as of yet, but the system itself should have the correct dependencies)
 - Based on Fedora Linux and Universal Blue
+- EXPERIMENTAL - OpenGamepadUI and Steam Big Picture Mode integration
 
 ---
 
