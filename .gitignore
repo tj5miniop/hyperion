@@ -5,3 +5,4 @@ _build-*/**
 *_chunkah_*
 *_rpm-ostree_*
 .venv
+PATCH_NOTES.md

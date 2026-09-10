@@ -6,4 +6,4 @@ IMAGE_NAME="SKIP_PACKAGE_INSTALL" AKMODNV_PATH="/tmp/rpms/nvidia" MULTILIB=1 /tm
 
 # Install NVIDIA specific files
 # Copy all files to root directory
-cp -avf "/ctx/system_files/shared/nvidia"/. /
+cp -avf "/ctx/system_files/nvidia"/. /
