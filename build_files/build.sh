@@ -37,7 +37,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility uv git
+dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch gnome-disk-utility uv git zed
 
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
@@ -83,25 +83,6 @@ dnf5 -y install papirus-icon-theme
 # ----------------------------
 # Copy all files to root directory
 cp -avf "/ctx/system_files"/. /
-
-
-# ---------------------------
-# - Copy First Setup Script -
-# ---------------------------
-SETUP_DIR="/tmp/hyperion/setup"
-GIT_REPO_SETUP="https://github.com/tj5miniop/hyperion-first-setup"
-DEST_DIR="/usr/share/hyperion-setup"
-
-# clone git repo 
-mkdir -p "$SETUP_DIR"
-cd "$SETUP_DIR"
-git clone "$GIT_REPO_SETUP" hyperion-first-setup
-cd hyperion-first-setup
-
-# Copy directory contents safely
-mkdir -p "$DEST_DIR"
-cp -a setup/. "$DEST_DIR/"
-
 # ----------------------------
 # --- Install misc RPMs ------
 # ----------------------------
