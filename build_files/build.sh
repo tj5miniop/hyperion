@@ -84,6 +84,14 @@ dnf -y install fuse fuse3
 # Papirus Icons
 dnf5 -y install papirus-icon-theme
 
+# Install Fluent KDE
+echo "--- Fluent Theme - CREDIT VINCELLUICE ---"
+DIR_FLUENT=/tmp/themes/
+REPO_NAME=Fluent-kde
+mkdir -p $DIR_FLUENT && cd $DIR_FLUENT
+git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
+
+
 # ----------------------------
 # ---- Copy System Files -----
 # ----------------------------
