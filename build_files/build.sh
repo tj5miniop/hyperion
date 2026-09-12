@@ -46,12 +46,12 @@ install_gaming_tools() {
 
 # Main section
 # Enable Terra repository - DO NOT MOVE AS TERRA NEEDS TO BE ENABLED FIRST
-run_section "Terra Repository Setup" install_pkgs --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-release-extras # Combined enable/install for Terra repo
+run_section "Terra Repository Setup" dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-release-extras # Combined enable/install for Terra repo
 
 # Install certain ublue-fixes
 echo "--- Updating/Configuring Universal Blue fixes... ---"
 dnf -y copr enable ublue-os/packages
-install_pkgs \
+dnf -y install \
     ublue-os-libvirt-workarounds \
     ublue-os-selinux-workarounds \
     ublue-os-signing \
@@ -59,7 +59,7 @@ install_pkgs \
     bazaar \
     ublue-os-media-automount-udev
 
-run_section "SELinux Fixes" install_pkgs selinux-policy-targeted
+run_section "SELinux Fixes" dnf -y install selinux-policy-targeted
 
 # Remove certain bundled packages
 echo " --- Removing certain native packages... ---"
@@ -84,24 +84,24 @@ run_section "Gaming Utilities/Tools" install_gaming_tools
 # ds-inhibit setup
 echo "--- Installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite
-install_pkgs ds-inhibit
+dnf -y install  ds-inhibit
 dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
-run_section "Virtualisation Tools" install_pkgs virt-manager libvirt qemu edk2-ovmf
+run_section "Virtualisation Tools" dnf -y install  virt-manager libvirt qemu edk2-ovmf
 
 # Zen browser setup
 echo "--- Installing Zen Browser... ---" # Kept the echo for this specific step
 dnf -y copr enable sneexy/zen-browser
-install_pkgs zen-browser
+dnf -y install  zen-browser
 dnf -y copr disable sneexy/zen-browser
 
 # CachyOS addons
-run_section "CachyOS Addons" install_pkgs \
+run_section "CachyOS Addons" dnf -y install  \
     swap zram-generator-defaults cachyos-settings power-profiles-daemon --allowerasing scx-manager scx-scheds scx-tools
 
 # AppImage Support
-run_section "AppImage Support" install_pkgs fuse fuse3
+run_section "AppImage Support" dnf -y install  fuse fuse3
 
 # Theming
 echo "--- Installing Papirus Icon Theme ---"
