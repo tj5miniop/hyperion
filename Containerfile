@@ -18,12 +18,15 @@ FROM ghcr.io/ublue-os/akmods:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION
 FROM ghcr.io/ublue-os/akmods-extra:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods-extra
 FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods-nvidia
 
+# --- Grab Brew ---
+FROM ghcr.io/ublue-os/brew:latest as brew
 # ---
 # hyperion - base image, NO NVIDIA drivers
 # code adapted from Bazzite
 # ---
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
-
+# Install Brew
+COPY --from=brew /system_files /
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
@@ -36,6 +39,9 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    /usr/bin/systemctl preset brew-setup.service && \
+    /usr/bin/systemctl preset brew-update.timer && \
+    /usr/bin/systemctl preset brew-upgrade.timer && \
     /ctx/build.sh && \
     /ctx/akmods.sh && \
     /ctx/os-release.sh && \
