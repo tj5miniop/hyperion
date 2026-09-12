@@ -3,7 +3,7 @@
 set -ouex pipefail
 
 echo "
- _    ___  _ ____  _____ ____  _  ____  _     
+ _    ___  _ ____  _____ ____  _  ____  _
 / \ /|\  \///  __\/  __//  __\/ \/  _ \/ \  /|
 | |_|| \  / |  \/||  \  |  \/|| || / \|| |\ ||
 | | || / /  |  __/|  /_ |    /| || \_/|| | \||
@@ -25,7 +25,7 @@ dnf -y install selinux-policy-targeted
 
 # Remove certain bundled packages
 echo " --- Removing certain native packages... ---"
-dnf -y remove --allowerasing -v\
+dnf -y remove \
     firefox \
     konsole \
     gwenview \
@@ -44,15 +44,15 @@ dnf -y install terra-release-extras
 echo "--- installing base packages... ---"
 dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch uv git zed
 echo "--- installing KDE/GNOME apps --"
-dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor 
+dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam protonplus protontricks gamemode 
+dnf -y install steam protonplus protontricks gamemode
 dnf -y install powerbuttond inputplumber
-dnf -y install gamescope-session gamescope-session-ogui-steam gamescope steamos-manager steam-notif-daemon 
+dnf -y install gamescope-session gamescope-session-ogui-steam gamescope steamos-manager steam-notif-daemon
 
 #echo "--- installing ds-inhibit ---"
-dnf -y copr enable bazzite-org/bazzite 
+dnf -y copr enable bazzite-org/bazzite
 dnf -y install ds-inhibit
 dnf -y copr disable bazzite-org/bazzite
 
@@ -66,10 +66,10 @@ dnf -y copr enable sneexy/zen-browser
 dnf -y install zen-browser
 dnf -y copr disable sneexy/zen-browser
 
-# Installing CachyOS addons 
+# Installing CachyOS addons
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
 dnf -y swap zram-generator-defaults cachyos-settings
-# Install certain dependencies 
+# Install certain dependencies
 dnf -y install power-profiles-daemon --allowerasing
 dnf -y install scx-manager scx-scheds scx-tools
 dnf -y copr disable bieszczaders/kernel-cachyos-addons
