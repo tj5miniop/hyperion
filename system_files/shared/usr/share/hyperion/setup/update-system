@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# WARNING: THIS SCRIPT WILL AUTOMATICALLY REBOOT YOUR SYSTEM TO APPLY UPDATES.
+
+read -rp "Do you wish to continue? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY])
+        ;;
+    *)
+        echo "Update cancelled."
+        exit 0
+        ;;
+esac
+
+echo "Updating Flatpaks..."
+flatpak update -y
+
+echo "Cleaning up rpm-ostree..."
+sudo rpm-ostree cleanup -r -m -d
+
+echo "Applying bootc upgrade..."
+sudo bootc upgrade --apply
