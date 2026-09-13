@@ -42,7 +42,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing
+dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing helium-browser-bin
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
 # Install Gaming Stuff
