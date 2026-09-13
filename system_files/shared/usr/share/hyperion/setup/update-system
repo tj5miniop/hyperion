@@ -17,7 +17,7 @@ echo "Updating Flatpaks..."
 flatpak update -y
 
 echo "Cleaning up rpm-ostree..."
-sudo rpm-ostree cleanup -r -m -d
+sudo rpm-ostree cleanup -r -m
 
 echo "Applying bootc upgrade..."
 sudo bootc upgrade --apply
