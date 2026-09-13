@@ -3,12 +3,12 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "",
-                "Name": ""
+                "Email": "tj5miniop@gmail.com",
+                "Name": "Daniel Downton"
             }
         ],
-        "Description": "",
-        "Id": "Hyperion",
+        "Description": "Theme for Hyperion, a Custom linux distro made by me",
+        "Id": "HYPERION",
         "License": "",
         "Name": "Hyperion",
         "Website": ""

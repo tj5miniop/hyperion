@@ -9,11 +9,16 @@ var layout = {
                 "/": {
                     "ItemGeometries-1024x768": "",
                     "ItemGeometries-1280x800": "",
+                    "ItemGeometries-2560x1440": "",
                     "ItemGeometriesHorizontal": "",
                     "formfactor": "0",
                     "immutability": "1",
                     "lastScreen": "0",
                     "wallpaperplugin": "org.kde.image"
+                },
+                "/ConfigDialog": {
+                    "DialogHeight": "630",
+                    "DialogWidth": "810"
                 },
                 "/Wallpaper/org.kde.image/General": {
                     "Image": "file:///usr/share/wallpapers/Hyperion-2026-08.png",
@@ -30,8 +35,8 @@ var layout = {
                 {
                     "config": {
                         "/": {
-                            "popupHeight": "509",
-                            "popupWidth": "648"
+                            "popupHeight": "467",
+                            "popupWidth": "309"
                         },
                         "/ConfigDialog": {
                             "DialogHeight": "630",
@@ -43,7 +48,7 @@ var layout = {
                             "systemFavorites": "suspend\\,hibernate\\,reboot\\,shutdown"
                         }
                     },
-                    "plugin": "org.kde.plasma.kickoff"
+                    "plugin": "org.kde.plasma.kickerdash"
                 },
                 {
                     "config": {
@@ -53,7 +58,7 @@ var layout = {
                 {
                     "config": {
                         "/General": {
-                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,applications:com.heroicgameslauncher.hgl.desktop,applications:org.equicord.equibop.desktop"
+                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.rfrench3.scopebuddy-gui.desktop"
                         }
                     },
                     "plugin": "org.kde.plasma.icontasks"
@@ -71,7 +76,7 @@ var layout = {
                 {
                     "config": {
                         "/": {
-                            "popupHeight": "400",
+                            "popupHeight": "451",
                             "popupWidth": "560"
                         },
                         "/Appearance": {
@@ -88,7 +93,7 @@ var layout = {
             ],
             "config": {
                 "/": {
-                    "formfactor": "2",
+                    "formfactor": "3",
                     "immutability": "1",
                     "lastScreen": "0",
                     "wallpaperplugin": "org.kde.image"
@@ -97,7 +102,7 @@ var layout = {
             "height": 2.5555555555555554,
             "hiding": "normal",
             "lengthMode": "fill",
-            "location": "top",
+            "location": "left",
             "maximumLength": 71.11111111111111,
             "minimumLength": 71.11111111111111,
             "offset": 0,
