@@ -10,18 +10,16 @@
 ---
 
 ## 📌 Important Notes
-
-- **Current State**: Ships with NVIDIA drivers (subject to change as this OS is tailored my personal rig)
-- **Secure Boot**: Currently not supported - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
-
+- **Secure Boot is Currently not supported** - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
 ---
 
 ## 🎯 Features
 
-- Optimized for gaming performance
+- 4 Images tailored for your device: Main bundles all the core features, NVIDIA adds NVIDIA drivers, ASUS adds ASUS drivers, and the HTPC image adds the steam deck like functionality
+- Optimized for gaming
 - AI/ML and 3D application support (These apps aren't installed by default as of yet, but the system itself should have the correct dependencies)
 - Based on Fedora Linux and Universal Blue
-- EXPERIMENTAL - OpenGamepadUI and Steam Big Picture Mode integration
+- Steam Big Picture Mode integration - can be used in the HTPC mode
 
 ---
 
