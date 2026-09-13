@@ -4,4 +4,4 @@ default_mode = "Gaming
 # Apply some GPU specific optimisation - Not shipped in main as could cause issues with handhelds etc
 [scheds.scx_cosmos]
 gaming_mode = ["-c", "0", "-p", "0", "--gpu"]
-auto_mode   = ["--gpu"]"
+auto_mode   = ["--gpu"]
