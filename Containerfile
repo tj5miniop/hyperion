@@ -101,3 +101,20 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 
 ### LINTING
 RUN bootc container lint
+
+# ---
+# hyperion-htpc - FULL SteamOS-Like variant of Hypeiron - based on hyperion-ASUS to keep the extra battery management tools, which should also work on ROG ally
+# ---
+FROM hyperion-asus AS hyperion-htpc
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/htpc.sh && \
+    /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
+    /ctx/cleanup.sh && \
+    echo "--- Build Complete: hyperion-HTPC ---"
+
+### LINTING
+RUN bootc container lint

@@ -1,0 +1,2 @@
+default_scheduler = "scx_lavd"
+default_mode = "auto"

@@ -31,7 +31,7 @@ jobs:
           - image_flavour: main
             image_suffix: ""
             containerfile_target: hyperion
-            rechunk: true
+            rechunk: false
           - image_flavour: nvidia
             image_suffix: "-nvidia"
             containerfile_target: hyperion-nvidia
@@ -39,7 +39,11 @@ jobs:
           - image_flavour: asus
             image_suffix: "-asus"
             containerfile_target: hyperion-asus
-            rechunk: false        
+            rechunk: false
+          - image_flavour: htpc
+            image_suffix: "-htpc"
+            containerfile_target: hyperion-htpc
+            rechunk: true
 
     permissions:
       contents: read
@@ -67,7 +71,7 @@ jobs:
         run: |
           BASE_IMAGE_NAME=$(just image_name)
           IMAGE_NAME="${BASE_IMAGE_NAME}${{ matrix.image_suffix}}"
-          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV 
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
       - name: Default Tag
         id: gen-default-tag
@@ -176,4 +180,3 @@ jobs:
           # https://github.com/coreos/rpm-ostree/issues/5509
           # use old bundle format, so we can use newer cosign 3.X.X instead of 2.X.X
           cosign sign -y --new-bundle-format=false --use-signing-config=false --key env://COSIGN_PRIVATE_KEY ${IMAGE_REGISTRY}/${IMAGE_NAME}@${DIGEST}
-
