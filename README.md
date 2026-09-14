@@ -22,6 +22,12 @@
 - Steam Big Picture Mode integration - can be used in the HTPC mode
 
 ---
+## Available Images 
+
+- Hyperion - the base hyperion image - includes all main features WITHOUT the NVIDIA drivers (Compatible with AMD/INTEL GPU's and NVIDIA using the NVK driver) 
+- Hyperion-NVIDIA - identical to 'hyperion', but with the NVIDIA drivers installed
+- Hyperion-ASUS - identical to 'hyperion', but with asus related tools installed
+- Hyperion-HTPC - meant for handhelds, with the steam big picture mode session enabled by default
 
 ## 👥 Credits
 

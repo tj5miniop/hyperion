@@ -58,7 +58,7 @@ var layout = {
                 {
                     "config": {
                         "/General": {
-                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.rfrench3.scopebuddy-gui.desktop"
+                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,file"
                         }
                     },
                     "plugin": "org.kde.plasma.icontasks"

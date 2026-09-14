@@ -42,7 +42,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing
+dnf -y install ghostty equibop vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing helium-browser-bin kvantum
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
 # Install Gaming Stuff
@@ -53,7 +53,7 @@ dnf -y install gamescope
 
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite
-dnf -y install ds-inhibit
+dnf -y install ds-inhibit steamdeck-backgrounds
 dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
@@ -78,16 +78,15 @@ dnf -y install fuse fuse3
 # Papirus Icons
 dnf5 -y install papirus-icon-theme
 
-# Install Fluent KDE
-echo "--- Fluent Theme - CREDIT VINCELLUICE ---"
+# Install Layan theme for KDE
+echo "--- Layan Theme - CREDIT VINCELLUICE ---"
 DIR_FLUENT=/tmp/themes/
-REPO_NAME=Fluent-kde
+REPO_NAME=Layan-kde
 mkdir -p $DIR_FLUENT && cd $DIR_FLUENT
 git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
 bash ./install.sh
 
 cd /tmp
-
 
 # ----------------------------
 # ---- Copy System Files -----
@@ -99,11 +98,13 @@ cp -avf "/ctx/system_files/shared"/. /
 # ----------------------------
 
 # Disclaimer
-# HYDRA Launcher is installed here, as it's one of the best "one-stop-shop" game launchers I can find for Linux (essentially like playnite)
-#It has some piracy-related features just to be aware - I am distributing this as part of hyperion NOT for anything related to piracy
+# Heroic Games Launcher - Allows for Epic Games, Amazon and GOG games
+# Faugus - Allows for standalone games/apps or other launchers to be installed
+# Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
+
 HEROIC_VER=2.22.1 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
 HYDRA_VER=4.1.3 # Source https://github.com/hydralauncher/hydra/
-FAUGUS_VER=2.2.2 # Source https://github.com/Faugus/faugus-launcher
+FAUGUS_VER=2.3.0 # Source https://github.com/Faugus/faugus-launcher
 DIR_RPMS=/tmp/local-rpms/
 mkdir -p $DIR_RPMS
 cd "$DIR_RPMS" || exit 1
