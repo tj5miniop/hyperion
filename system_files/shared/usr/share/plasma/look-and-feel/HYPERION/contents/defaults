@@ -2,13 +2,13 @@
 cursorTheme=Breeze_Light
 
 [kdeglobals][General]
-ColorScheme=BreezeDark
+ColorScheme=Layan
 
 [kdeglobals][Icons]
 Theme=Papirus-Dark
 
 [kdeglobals][KDE]
-widgetStyle=Breeze
+widgetStyle=kvantum-dark
 
 [kwinrc][DesktopSwitcher]
 LayoutName=org.kde.breeze.desktop
@@ -17,8 +17,8 @@ LayoutName=org.kde.breeze.desktop
 LayoutName=org.kde.breeze.desktop
 
 [kwinrc][org.kde.kdecoration2]
-library=org.kde.kwin.aurorae.v2
-theme=__aurorae__svg__Fluent-dark
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Layan
 
 [plasmarc][Theme]
-name=Fluent
+name=Layan
