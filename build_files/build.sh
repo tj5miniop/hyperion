@@ -49,7 +49,7 @@ dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
 echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode
 dnf -y install powerbuttond inputplumber
-dnf -y install gamescope-session gamescope-session-ogui-steam gamescope steamos-manager steam-notif-daemon
+dnf -y install gamescope
 
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite
@@ -59,12 +59,6 @@ dnf -y copr disable bazzite-org/bazzite
 # Install Virtualisation Tools
 echo "--- Installing Virtualisation Tools... ---"
 dnf -y install virt-manager libvirt qemu edk2-ovmf
-
-# install Zen browser (https://zen-browser.app/)
-echo "--- Installing Zen Browser... ---"
-dnf -y copr enable sneexy/zen-browser
-dnf -y install zen-browser
-dnf -y copr disable sneexy/zen-browser
 
 # Installing CachyOS addons
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
