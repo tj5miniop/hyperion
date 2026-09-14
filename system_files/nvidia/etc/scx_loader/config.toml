@@ -1,5 +1,5 @@
 default_scheduler = "scx_cosmos"
-default_mode = "Gaming
+default_mode = "Gaming"
 
 # Apply some GPU specific optimisation - Not shipped in main as could cause issues with handhelds etc
 [scheds.scx_cosmos]
