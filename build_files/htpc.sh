@@ -10,4 +10,4 @@ dnf -y install \
     steamos-manager \
     steam-notif-daemon \
     gamescope-session \
-    plasma6-applet-tdp-control \
+    plasma-applet-tdp-control \
