@@ -53,7 +53,7 @@ dnf -y install gamescope
 
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite
-dnf -y install ds-inhibit steamdeck-backgrounds
+dnf -y install ds-inhibit
 dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
