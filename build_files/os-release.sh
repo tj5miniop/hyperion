@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 set -eoux pipefail
 
-# set os-release vars 
+# set os-release vars
 IMAGE_PRETTY_NAME="Hyperion Linux"
 BASE_IMAGE_NAME="hyperion"
 IMAGE_NAME="hyperion"
+ID_LIKE="fedora"
 FEDORA_VERSION="44"
 VERSION_TAG=$FEDORA_VERSION
 VERSION_PRETTY=$FEDORA_VERSION
@@ -15,7 +16,7 @@ SUPPORT_URL="https://github.com/tj5miniop/hyperion"
 BUG_SUPPORT_URL="https://github.com/tj5miniop/hyperion/issues"
 IMAGE_INFO="/usr/share/ublue-os/image-info.json"
 
-# credit to BAZZITE again - adapted to my needs 
+# credit to BAZZITE again - adapted to my needs
 
 # Image Info File
 cat > $IMAGE_INFO <<EOF
@@ -37,9 +38,9 @@ sed -i "s|^DOCUMENTATION_URL=.*|DOCUMENTATION_URL=\"$DOCUMENTATION_URL\"|" /usr/
 sed -i "s|^SUPPORT_URL=.*|SUPPORT_URL=\"$SUPPORT_URL\"|" /usr/lib/os-release
 sed -i "s|^BUG_REPORT_URL=.*|BUG_REPORT_URL=\"$BUG_SUPPORT_URL\"|" /usr/lib/os-release
 sed -i "s/^DEFAULT_HOSTNAME=.*/DEFAULT_HOSTNAME=\"${IMAGE_PRETTY_NAME,}\"/" /usr/lib/os-release
-sed -i "s/^ID=fedora/ID=${IMAGE_PRETTY_NAME,}\nID_LIKE=\"${IMAGE_LIKE}\"/" /usr/lib/os-release
+sed -i "s/^ID=fedora/ID=${BASE_IMAGE_NAME,}\nID_LIKE=\"${ID_LIKE}\"/" /usr/lib/os-release
 
-# Rebrand system-release so that grub2-mkconfig uses "Bazzite" as the distributor
+# Rebrand system-release so that grub2-mkconfig uses "hyperion" as the distributor
 echo "$IMAGE_PRETTY_NAME release $FEDORA_VERSION (${BASE_IMAGE_NAME^})" > /etc/system-release
 
 # Fix issues caused by ID no longer being fedora
