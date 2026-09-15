@@ -20,6 +20,9 @@ var layout = {
                     "DialogHeight": "630",
                     "DialogWidth": "810"
                 },
+                "/General": {
+                    "previews": "false"
+                },
                 "/Wallpaper/org.kde.image/General": {
                     "Image": "file:///usr/share/wallpapers/Hyperion-2026-08.png",
                     "SlidePaths": "/usr/share/wallpapers/"
@@ -58,7 +61,7 @@ var layout = {
                 {
                     "config": {
                         "/General": {
-                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,file"
+                            "launchers": "applications:systemsettings.desktop,preferred://browser,preferred://filemanager,applications:com.mitchellh.ghostty.desktop,applications:io.github.kolunmi.Bazaar.desktop,applications:steam.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.rfrench3.scopebuddy-gui.desktop"
                         }
                     },
                     "plugin": "org.kde.plasma.icontasks"
