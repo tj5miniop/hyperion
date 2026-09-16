@@ -102,7 +102,7 @@ cp -avf "/ctx/system_files/shared"/. /
 # Faugus - Allows for standalone games/apps or other launchers to be installed
 # Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
 
-HEROIC_VER=2.22.1 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
+HEROIC_VER=2.22.2 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
 HYDRA_VER=4.1.3 # Source https://github.com/hydralauncher/hydra/
 FAUGUS_VER=2.3.0 # Source https://github.com/Faugus/faugus-launcher
 DIR_RPMS=/tmp/local-rpms/
