@@ -80,9 +80,9 @@ dnf5 -y install papirus-icon-theme
 
 # Install Layan theme for KDE
 echo "--- Layan Theme - CREDIT VINCELLUICE ---"
-DIR_FLUENT=/tmp/themes/
+DIR_Layan=/tmp/themes/
 REPO_NAME=Layan-kde
-mkdir -p $DIR_FLUENT && cd $DIR_FLUENT
+mkdir -p $DIR_Layan && cd $DIR_Layan
 git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
 bash ./install.sh
 
@@ -102,8 +102,8 @@ cp -avf "/ctx/system_files/shared"/. /
 # Faugus - Allows for standalone games/apps or other launchers to be installed
 # Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
 
-HEROIC_VER=2.22.2 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
-HYDRA_VER=4.1.3 # Source https://github.com/hydralauncher/hydra/
+HEROIC_VER=2.22.3 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
+HYDRA_VER=4.1.4 # Source https://github.com/hydralauncher/hydra/
 FAUGUS_VER=2.3.0 # Source https://github.com/Faugus/faugus-launcher
 DIR_RPMS=/tmp/local-rpms/
 mkdir -p $DIR_RPMS
