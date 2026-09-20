@@ -71,6 +71,9 @@ dnf -y copr disable bieszczaders/kernel-cachyos-addons
 # AppImage Support rework
 dnf -y install fuse fuse3 fuse-libs fuse3-libs
 
+# Install Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
 # ---------------------------
 # ------- Theming -----------
 # ---------------------------
