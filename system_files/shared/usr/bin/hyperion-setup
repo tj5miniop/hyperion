@@ -1,5 +1,0 @@
-#!/bin/bash 
-
-# Run script using a UV preview options
-uv run --preview /usr/share/hyperion-setup/
-
