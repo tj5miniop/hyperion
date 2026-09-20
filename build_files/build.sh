@@ -69,7 +69,7 @@ dnf -y install scx-manager scx-scheds scx-tools
 dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
 # AppImage Support rework
-dnf -y install fuse fuse3
+dnf -y install fuse fuse3 fuse-libs fuse3-libs
 
 # ---------------------------
 # ------- Theming -----------
