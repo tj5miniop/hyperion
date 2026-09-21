@@ -9,6 +9,3 @@ install-decky:
 
 reset-scx:
 	sudo rm -rf /etc/scx_loader/*
-
-install-cpak:
-    /usr/share/hyperion/setup/install-cpak
