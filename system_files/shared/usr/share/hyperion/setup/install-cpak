@@ -1,0 +1,26 @@
+# ----------------------------
+# ------ Install CPAK --------
+# ----------------------------
+# https://github.com/Containerpak/cpak/releases/latest
+CPAK_VER=2.13.3
+CPAK_URL=https://github.com/Containerpak/cpak/releases/download
+DIR=~/.hyperion/cpak
+
+mkdir -p $DIR && cd $DIR
+
+# Install CPAK
+curl -L $CPAK_URL/v$CPAK_VER/cpak-linux-amd64 --output cpak
+#Install storaged
+curl -L $CPAK_URL/v$CPAK_VER/cpak-storaged-linux-amd64 --output cpak-storaged
+# Install SHA256sums
+curl -L $CPAK_URL/v$CPAK_VER/SHA256SUMS --output SHA256SUMS
+
+# Check SHA256SUMS
+sha256sum -c --ignore-missing SHA256SUMS
+
+# Install cpak into .local/bin
+install -Dm755 cpak "$HOME/.local/bin/cpak"
+install -Dm755 cpak-storaged "$HOME/.local/bin/cpak-storaged"
+
+cpak system setup
+cpak doctor
