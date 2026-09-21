@@ -51,6 +51,11 @@ dnf -y install steam protonplus protontricks gamemode
 dnf -y install powerbuttond inputplumber
 dnf -y install gamescope
 
+# install python devel packages
+dnf -y install \
+    python3.14 \
+    python3.14-devel \
+
 #echo "--- installing ds-inhibit ---"
 dnf -y copr enable bazzite-org/bazzite
 dnf -y install ds-inhibit
