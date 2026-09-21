@@ -118,6 +118,16 @@ curl -L https://github.com/Faugus/faugus-launcher/releases/download/$FAUGUS_VER/
 
 dnf -y install ./*.rpm --allowerasing
 
+# ----------------------------
+# ------ Install CPAK --------
+# ----------------------------
+# https://github.com/Containerpak/cpak/releases/latest
+CPAK_VER=2.13.3
+
+curl -L https://github.com/Containerpak/cpak/releases/download/v$CPAK_VER/cpak-linux-amd64 --output /usr/bin/cpak
+chmod +x /usr/bin/cpak
+
+
 
 # ---------------------------
 # ------- SystemD ----------=
