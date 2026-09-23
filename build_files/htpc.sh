@@ -17,4 +17,4 @@ GIT_REPO=https://github.com/tj5miniop/gamescope-session-nested
 GSC_SES_DIR=/tmp/
 cd $GSC_SES_DIR
 git clone $GIT_REPO
-cd gamescope-session-nested && ./install.sh
+cd gamescope-session-nested && bash ./install.sh
