@@ -51,6 +51,7 @@ echo "--- installing Gaming Utilities/Tools... ---"
 dnf -y install steam protonplus protontricks gamemode
 dnf -y install powerbuttond inputplumber
 dnf -y install gamescope
+dnf -y install gamemode mangohud
 
 # install python devel packages
 dnf -y install \

@@ -17,9 +17,7 @@ dnf -y install \
 # Controllers and gaming utilities
 dnf -y install \
     8bitdo-udev-rules \
-    wooting-udev-rules \
-    gamemode \
-    mangohud
+    wooting-udev-rules
 
 # Networking Tools
 dnf -y install \
