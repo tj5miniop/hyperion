@@ -7,7 +7,4 @@
 dnf -y install \
     gamescope-session-steam \
     inputplumber \
-    steamos-manager \
-    steam-notif-daemon \
     gamescope-session \
-    plasma-applet-tdp-control \
