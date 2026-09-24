@@ -11,10 +11,3 @@ dnf -y install \
     steam-notif-daemon \
     gamescope-session \
     plasma-applet-tdp-control \
-
-# Install nested gamescope session
-GIT_REPO=https://github.com/tj5miniop/gamescope-session-nested
-GSC_SES_DIR=/tmp/
-cd $GSC_SES_DIR
-git clone $GIT_REPO
-cd gamescope-session-nested && bash ./install.sh
