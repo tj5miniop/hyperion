@@ -44,6 +44,10 @@ jobs:
             image_suffix: "-htpc"
             containerfile_target: hyperion-htpc
             rechunk: true
+          - image_flavour: labwc
+            image_suffix: "-labwc"
+            containerfile_target: hyperion-labwc
+            rechunk: true
 
     permissions:
       contents: read

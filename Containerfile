@@ -3,6 +3,7 @@ ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_WM="${BASE_IMAGE:-quay.io/fedora-bootc:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 # For the exact kernel version, use the kernel-version-checker script included in the image
 ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.6-ogc3.1.fc${FEDORA_VERSION}.${ARCH}}"
@@ -42,6 +43,39 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /usr/bin/systemctl preset brew-setup.service && \
     /usr/bin/systemctl preset brew-update.timer && \
     /usr/bin/systemctl preset brew-upgrade.timer && \
+    /ctx/build.sh && \
+    /ctx/akmods.sh && \
+    /ctx/os-release.sh && \
+    /ctx/initramfs.sh && \
+    /ctx/cleanup.sh && \
+    echo "--- Build Complete: hyperion ---"
+
+# ---
+# Hyperion Labwc
+# ---
+# ---
+# hyperion - base image with LABWC, NO NVIDIA drivers
+# code adapted from Bazzite
+# ---
+FROM ${BASE_IMAGE_WM} AS hyperion-labwc
+# Install Brew
+COPY --from=brew /system_files /
+# Make OPT immutable to allow for Zen browser and extra packages to work
+RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
+
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
+    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
+    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
+    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
+    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    /usr/bin/systemctl preset brew-setup.service && \
+    /usr/bin/systemctl preset brew-update.timer && \
+    /usr/bin/systemctl preset brew-upgrade.timer && \
+    /ctx/labwc.sh && \
     /ctx/build.sh && \
     /ctx/akmods.sh && \
     /ctx/os-release.sh && \
