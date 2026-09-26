@@ -44,6 +44,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /usr/bin/systemctl preset brew-update.timer && \
     /usr/bin/systemctl preset brew-upgrade.timer && \
     /ctx/build.sh && \
+    /ctx/desktop.sh && \
     /ctx/akmods.sh && \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
