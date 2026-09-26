@@ -3,7 +3,7 @@ set -ouex pipefail
 
 dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y install \
-    ly NetworkManager xorg-x11-server-xwayland wayland-utils \
+    ly NetworkManager xorg-x11-server-Xwayland wayland-utils \
     quickshell labwc alacritty git polkit polkit-kde
 dnf5 -y copr disable errornointernet/quickshell
 
