@@ -3,8 +3,8 @@ set -ouex pipefail
 
 dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y install \
-    ly NetworkManager xorg-x11-server-xwayland wayland-utils \
-    quickshell labwc alacritty git polkit polkit-gnome
+    ly NetworkManager xorg-x11-server-Xwayland wayland-utils \
+    quickshell labwc alacritty git polkit polkit-kde kernel-tools-libs kernel-tools
 dnf5 -y copr disable errornointernet/quickshell
 
 # Enable SystemD Stuff
@@ -18,8 +18,7 @@ mkdir -p "$WORK_DIR_DOTS" && cd "$WORK_DIR_DOTS"
 git clone --depth 1 https://github.com/tj5miniop/tj5-de/
 # Copy to Skel, for any user created after first boot...
 cp -r tj5-de/.config/ /etc/skel/
-# ...and to root
-cp -r tj5-de/.config/ /root/
+
 # Return back to root
 cd /
 rm -rf "$WORK_DIR_DOTS"
