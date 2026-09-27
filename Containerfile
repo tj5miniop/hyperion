@@ -3,7 +3,7 @@ ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
-ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-quay.io/fedora/fedora-bootc:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-ghcr.io/ublue-os/base-main:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 # For the exact kernel version, use the kernel-version-checker script included in the image
 ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.6-ogc3.1.fc${FEDORA_VERSION}.${ARCH}}"
@@ -44,6 +44,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /usr/bin/systemctl preset brew-update.timer && \
     /usr/bin/systemctl preset brew-upgrade.timer && \
     /ctx/build.sh && \
+    /ctx/desktop.sh && \
     /ctx/akmods.sh && \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
