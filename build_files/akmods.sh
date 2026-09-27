@@ -37,6 +37,7 @@ dnf5 versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel
     /tmp/rpms/{common,kmods}/*openrazer*.rpm \
     /tmp/rpms/{common,kmods}/*v4l2loopback*.rpm \
     /tmp/rpms/{common,kmods}/*xone*.rpm
+    /tmp/rpms/{common,kmods}/ublue-os-akmods-addons-*.rpm
 
 /ctx/install-kmods.sh \
     /tmp/rpms/{extra,kmods-extra}/*zenergy*.rpm \
