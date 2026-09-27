@@ -65,7 +65,7 @@ dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
 echo "--- Installing Virtualisation Tools... ---"
-dnf -y install virt-manager libvirt qemu edk2-ovmf
+dnf -y install virt-manager libvirt qemu edk2-ovmf swtpm
 
 # Installing CachyOS addons
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
@@ -113,8 +113,8 @@ cp -avf "/ctx/system_files/shared"/. /
 # Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
 
 HEROIC_VER=2.22.3 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
-HYDRA_VER=4.1.4 # Source https://github.com/hydralauncher/hydra/
-FAUGUS_VER=2.3.0 # Source https://github.com/Faugus/faugus-launcher
+HYDRA_VER=4.1.5 # Source https://github.com/hydralauncher/hydra/
+FAUGUS_VER=2.4.2 # Source https://github.com/Faugus/faugus-launcher
 DIR_RPMS=/tmp/local-rpms/
 mkdir -p $DIR_RPMS
 cd "$DIR_RPMS" || exit 1
