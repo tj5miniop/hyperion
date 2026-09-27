@@ -48,6 +48,10 @@ jobs:
             image_suffix: "-labwc"
             containerfile_target: hyperion-labwc
             rechunk: true
+          - image_flavour: labwc-nvidia
+            image_suffix: "-labwc-nvidia"
+            containerfile_target: hyperion-labwc-nvidia
+            rechunk: true
 
     permissions:
       contents: read

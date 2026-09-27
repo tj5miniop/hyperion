@@ -121,6 +121,27 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 RUN bootc container lint
 
 # ---
+# hyperion-labwc-nvidia - Add the NVIDIA DRIVERS
+# ---
+FROM hyperion-labwc AS hyperion-labwc-nvidia
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
+    /ctx/nvidia.sh && \
+    /ctx/initramfs.sh && \
+    /ctx/os-release.sh && \
+    /ctx/cleanup.sh && \
+    echo "--- Build Complete: hyperion-nvidia ---"
+
+### LINTING
+RUN bootc container lint
+
+
+
+
+# ---
 # hyperion-asus - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image.
 # ---
 FROM hyperion AS hyperion-asus
