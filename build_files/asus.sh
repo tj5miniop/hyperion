@@ -2,8 +2,7 @@
 
 # Terra Repo is enabled in the previous build.sh
 # UPDATE - added asusctl-rog-gui for a nice GUI
-dnf5 -y install asusctl asusctl-rog-gui
-
+dnf5 -y install asusctl asusctl-rog-gui waydroid
 # Add systemd units
 systemctl enable asusd.service
 systemctl enable asus-shutdown.service
