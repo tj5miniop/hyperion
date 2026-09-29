@@ -32,10 +32,6 @@ jobs:
             image_suffix: ""
             containerfile_target: hyperion
             rechunk: false
-          - image_flavour: nvidia
-            image_suffix: "-nvidia"
-            containerfile_target: hyperion-nvidia
-            rechunk: false
           - image_flavour: asus
             image_suffix: "-asus"
             containerfile_target: hyperion-asus
