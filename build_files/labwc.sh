@@ -12,6 +12,9 @@ dnf5 -y copr disable errornointernet/quickshell
 # Noctalia
 dnf5 -y install noctalia
 
+# Install other apps 
+dnf5 -y install thunar pipewire pipewirte-media-session wireplumber bluez bluez-tools NetworkManager-tui
+
 # Enable SystemD Stuff
 systemctl enable NetworkManager
 systemctl enable ly@tty1
