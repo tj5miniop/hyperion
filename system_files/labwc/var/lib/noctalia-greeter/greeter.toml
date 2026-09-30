@@ -1,0 +1,11 @@
+[session]
+default = "labwc"
+
+[appearance]
+scheme = "Synced"
+password_style = "default"
+hide_logo = true
+
+# Layout
+power_buttons_position = "bottom-left"
+scheme_selector_position = "top-right"
