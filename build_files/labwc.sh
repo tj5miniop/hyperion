@@ -12,8 +12,12 @@ dnf5 -y copr disable errornointernet/quickshell
 # Noctalia
 dnf5 -y install noctalia
 
+# Install theming apps
+dnf5 -y install lxappearance kvantum
+# Install dotfiles related tools
+dnf5 -y install stow
 # Install other apps 
-dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
+dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui 
 
 # Enable SystemD Stuff
 systemctl enable NetworkManager
@@ -26,6 +30,16 @@ mkdir -p "$WORK_DIR_DOTS" && cd "$WORK_DIR_DOTS"
 git clone --depth 1 https://github.com/tj5miniop/tj5-de/
 # Copy to Skel, for any user created after first boot...
 cp -r tj5-de/.config/ /etc/skel/
+
+cd $WORK_DIR_DOTS
+# Install GTK Theme
+git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
+  (cd Colloid-gtk-theme && sudo ./install.sh --tweaks nord)
+
+# Install Cursor Theme
+git clone https://github.com/ayushkrsingh/cyberpunk-neon-cursors && \
+  (cd cyberpunk-neon-cursors && sudo ./install.sh -s)
+
 
 # Return back to root
 cd /
