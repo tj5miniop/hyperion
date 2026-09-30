@@ -2,16 +2,12 @@
 set -ouex pipefail
 
 
-# Quickshell
-dnf5 -y copr enable errornointernet/quickshell
+# Base Desktop (Labwc)
 dnf5 -y install \
-    ly NetworkManager xorg-x11-server-Xwayland wayland-utils \
-    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc xdg-desktop-portal xdg-desktop-portal-wlr
-dnf5 -y copr disable errornointernet/quickshell
-
+    NetworkManager xorg-x11-server-Xwayland wayland-utils \
+    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc xdg-desktop-portal xdg-desktop-portal-wlr jetbrains-mono-fonts-all
 # Noctalia
 dnf5 -y install noctalia
-
 # Install theming apps
 dnf5 -y install lxappearance kvantum
 # Install dotfiles related tools
@@ -19,9 +15,12 @@ dnf5 -y install stow
 # Install other apps
 dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
+# Install Login Manager
+dnf5 -y install noctalia-greeter
+
 # Enable SystemD Stuff
 systemctl enable NetworkManager
-systemctl enable ly@tty1
+systemctl enable greetd
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
