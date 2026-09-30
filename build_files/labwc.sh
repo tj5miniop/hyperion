@@ -6,7 +6,7 @@ set -ouex pipefail
 dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y install \
     ly NetworkManager xorg-x11-server-Xwayland wayland-utils \
-    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi
+    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc
 dnf5 -y copr disable errornointernet/quickshell
 
 # Noctalia
