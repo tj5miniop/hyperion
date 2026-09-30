@@ -25,6 +25,8 @@ systemctl enable ly@tty1
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
+$WORK_DIR_DOTS = /tmp/dots/
+mkdir -p $WORK_DIR_DOTS
 cd $WORK_DIR_DOTS
 # Install GTK Theme
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
