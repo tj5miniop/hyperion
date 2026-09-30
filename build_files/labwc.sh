@@ -24,7 +24,7 @@ systemctl enable greetd
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
-$WORK_DIR_DOTS = /tmp/dots/
+WORK_DIR_DOTS = /tmp/dots/
 mkdir -p $WORK_DIR_DOTS
 cd $WORK_DIR_DOTS
 # Install GTK Theme
