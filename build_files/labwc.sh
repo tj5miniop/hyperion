@@ -16,8 +16,8 @@ dnf5 -y install noctalia
 dnf5 -y install lxappearance kvantum
 # Install dotfiles related tools
 dnf5 -y install stow
-# Install other apps 
-dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui 
+# Install other apps
+dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
 # Enable SystemD Stuff
 systemctl enable NetworkManager

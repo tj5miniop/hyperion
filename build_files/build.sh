@@ -23,17 +23,6 @@ dnf copr enable ublue-os/packages
 echo "--- installing SELINUX FIXES... ---"
 dnf -y install selinux-policy-targeted
 
-# Remove certain bundled packages
-echo " --- Removing certain native packages... ---"
-dnf -y remove \
-    firefox \
-    konsole \
-    gwenview \
-    haruna \
-    kwrite \
-    kate \
-    plasma-systemmonitor \
-
 # Enable Terra repo
 dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 
@@ -42,7 +31,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git zed syncthing helium-browser-bin
+dnf -y install vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing helium-browser-bin
 dnf -y install wayland-devel libwayland-client
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
@@ -80,23 +69,6 @@ dnf -y install fuse fuse3 fuse-libs fuse3-libs
 
 # Install Tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
-
-# ---------------------------
-# ------- Theming -----------
-# ---------------------------
-# This section of the script does not directly set up the dotfiles but will install all dependencies
-# Papirus Icons
-dnf5 -y install papirus-icon-theme
-
-# Install Layan theme for KDE
-echo "--- Layan Theme - CREDIT VINCELLUICE ---"
-DIR_Layan=/tmp/themes/
-REPO_NAME=Layan-kde
-mkdir -p $DIR_Layan && cd $DIR_Layan
-git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
-bash ./install.sh
-
-cd /tmp
 
 # ----------------------------
 # ---- Copy System Files -----
