@@ -6,7 +6,7 @@ set -ouex pipefail
 dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y install \
     ly NetworkManager xorg-x11-server-Xwayland wayland-utils \
-    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc
+    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc xdg-desktop
 dnf5 -y copr disable errornointernet/quickshell
 
 # Noctalia
@@ -24,22 +24,19 @@ systemctl enable NetworkManager
 systemctl enable ly@tty1
 systemctl set-default graphical.target
 
-# Install dotfiles - possibly install them to skel and implement a ujust dotfiles-update command to update the dots
-WORK_DIR_DOTS=/tmp/dots/
-mkdir -p "$WORK_DIR_DOTS" && cd "$WORK_DIR_DOTS"
-git clone --depth 1 https://github.com/tj5miniop/tj5-de/
-# Copy to Skel, for any user created after first boot...
-cp -r tj5-de/.config/ /etc/skel/
-
+# Install dotfiles - REMOVED - now replaced with Themes
 cd $WORK_DIR_DOTS
 # Install GTK Theme
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
   (cd Colloid-gtk-theme && sudo ./install.sh --tweaks nord)
 
 # Install Cursor Theme
-git clone https://github.com/ayushkrsingh/cyberpunk-neon-cursors && \
-  (cd cyberpunk-neon-cursors && sudo ./install.sh -s)
+git clone https://github.com/vinceliuice/Vimix-cursors && \
+  (cd Vimix-cursors && sudo ./install.sh)
 
+# Install Icon theme
+git clone https://github.com/vinceliuice/WhiteSur-icon-theme && \
+  (cd WhiteSur-icon-theme && sudo ./install.sh -t purple -a)
 
 # Return back to root
 cd /
