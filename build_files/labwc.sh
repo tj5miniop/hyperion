@@ -7,7 +7,7 @@ dnf5 -y install \
     NetworkManager xorg-x11-server-Xwayland wayland-utils \
     quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools sassc xdg-desktop-portal xdg-desktop-portal-wlr jetbrains-mono-fonts-all
 # Noctalia
-dnf5 -y install noctalia
+dnf5 -y install noctalia-nightly
 # Install theming apps
 dnf5 -y install lxappearance kvantum
 # Install dotfiles related tools
@@ -16,16 +16,15 @@ dnf5 -y install stow
 dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
 # Install Login Manager
-# dnf5 -y install noctalia-greeter # Wait till the mirror is back up
-dnf5 -y install ly
+dnf5 -y install noctalia-greeter # Wait till the mirror is back up
+#dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
-#systemctl enable greetd
-systemctl enable ly@tty1
+systemctl enable greetd
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
-WORK_DIR_DOTS = /tmp/dots/
+WORK_DIR_DOTS=/tmp/dots/
 mkdir -p $WORK_DIR_DOTS
 cd $WORK_DIR_DOTS
 # Install GTK Theme
@@ -46,3 +45,8 @@ rm -rf "$WORK_DIR_DOTS"
 
 # Copy LABWC files to system
 cp -avf "/ctx/system_files/labwc"/. /
+
+
+# Cleanup
+
+dnf5 -y clean all

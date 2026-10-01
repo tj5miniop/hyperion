@@ -9,3 +9,13 @@ hide_logo = true
 # Layout
 power_buttons_position = "bottom-left"
 scheme_selector_position = "top-right"
+
+[cursor]
+size = 24 # Same as my dotfiles
+theme = "Vimix-cursors"
+
+[keyboard]
+layout="gb,us"
+
+[auth]
+allow_empty_password = false
