@@ -1,0 +1,10 @@
+[misc]
+
+allow_root = false
+pre_sudo = true
+
+# disable RPM-OSTREE as bootc is now being used. Users will need to use the "ujust hyperion-update" command
+disable = ["system", "git"]
+
+cleanup = true
+notify_each_step = true
