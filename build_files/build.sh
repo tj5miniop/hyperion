@@ -31,7 +31,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman distrobox fastfetch uv git zed syncthing helium-browser-bin
+dnf -y install vlc ffmpeg flatpak podman distrobox fastfetch uv git zed-nightly syncthing helium-browser-bin
 dnf -y install wayland-devel libwayland-client
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
@@ -48,9 +48,9 @@ dnf -y install \
     python3.14-devel \
 
 #echo "--- installing ds-inhibit ---"
-dnf -y copr enable bazzite-org/bazzite
-dnf -y install ds-inhibit
-dnf -y copr disable bazzite-org/bazzite
+#dnf -y copr enable bazzite-org/bazzite
+#dnf -y install ds-inhibit
+#dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
 echo "--- Installing Virtualisation Tools... ---"
@@ -110,3 +110,10 @@ systemctl enable libvirtd
 
 # ds-inhbit
 systemctl enable ds-inhibit
+
+# ---------------------------
+# ----- Extra Utilities  ----
+# ---------------------------
+
+# Topgrade
+dnf5 -y install topgrade

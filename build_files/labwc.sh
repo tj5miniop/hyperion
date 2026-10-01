@@ -7,7 +7,7 @@ dnf5 -y install \
     NetworkManager xorg-x11-server-Xwayland wayland-utils \
     quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools wofi sassc xdg-desktop-portal xdg-desktop-portal-wlr jetbrains-mono-fonts-all
 # Noctalia
-dnf5 -y install noctalia
+dnf5 -y install noctalia-nightly
 # Install theming apps
 dnf5 -y install lxappearance kvantum
 # Install dotfiles related tools
@@ -46,3 +46,8 @@ rm -rf "$WORK_DIR_DOTS"
 
 # Copy LABWC files to system
 cp -avf "/ctx/system_files/labwc"/. /
+
+
+# Cleanup
+
+dnf5 -y clean all
