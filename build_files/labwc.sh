@@ -21,7 +21,6 @@ dnf5 -y install noctalia-greeter # Wait till the mirror is back up
 # Enable SystemD Stuff
 systemctl enable NetworkManager
 systemctl enable greetd
-systemctl enable ly@tty1
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
