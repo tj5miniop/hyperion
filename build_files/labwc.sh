@@ -16,12 +16,12 @@ dnf5 -y install stow
 dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
 # Install Login Manager
-# dnf5 -y install noctalia-greeter # Wait till the mirror is back up
-dnf5 -y install ly
+dnf5 -y install noctalia-greeter # Wait till the mirror is back up
+# dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
-#systemctl enable greetd
-systemctl enable ly@tty1
+systemctl enable greetd
+#systemctl enable ly@tty1
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
