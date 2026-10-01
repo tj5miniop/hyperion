@@ -47,10 +47,10 @@ dnf -y install \
     python3.14 \
     python3.14-devel \
 
-#echo "--- installing ds-inhibit ---"
-#dnf -y copr enable bazzite-org/bazzite
-#dnf -y install ds-inhibit
-#dnf -y copr disable bazzite-org/bazzite
+echo "--- installing ds-inhibit ---"
+dnf -y copr enable bazzite-org/bazzite
+dnf -y install ds-inhibit
+dnf -y copr disable bazzite-org/bazzite
 
 # Install Virtualisation Tools
 echo "--- Installing Virtualisation Tools... ---"
