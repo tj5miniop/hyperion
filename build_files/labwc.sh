@@ -12,15 +12,18 @@ dnf5 -y install noctalia-nightly
 dnf5 -y install lxappearance kvantum
 # Install dotfiles related tools
 dnf5 -y install stow
+
+# Install ZSH
+dnf5 -y install zsh
+
 # Install other apps
 dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
 # Install Login Manager
-dnf5 -y install noctalia-greeter # Wait till the mirror is back up
-#dnf5 -y install ly
+dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
-systemctl enable greetd
+systemctl enable ly
 systemctl set-default graphical.target
 
 # Install dotfiles - REMOVED - now replaced with Themes
