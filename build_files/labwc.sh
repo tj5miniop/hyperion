@@ -23,9 +23,8 @@ dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
-systemctl enable ly
 systemctl set-default graphical.target
-
+systemctl enable ly@tty1
 # Install dotfiles - REMOVED - now replaced with Themes
 WORK_DIR_DOTS=/tmp/dots/
 mkdir -p $WORK_DIR_DOTS
