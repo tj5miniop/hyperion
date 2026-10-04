@@ -54,6 +54,10 @@ jobs:
             image_suffix: "-labwc-nvidia"
             containerfile_target: hyperion-labwc-nvidia
             rechunk: true
+          # Fedora Testing Images
+          - image_flavour: testing
+            image_suffix: "-testing"
+            containerfile_target: hyperion-testing
 
     permissions:
       contents: read
