@@ -1,8 +1,10 @@
 # --- Build Arguments ---
 ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
+ARG FEDORA_VERSION_TESTING="${FEDORA_VERSION_TESTING:-45}"
 ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_45="${BASE_IMAGE_45:-quay.io/fedora/fedora-silverblue:${FEDORA_VERSION_TESTING}}"
 ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-ghcr.io/ublue-os/base-main:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
@@ -10,6 +12,7 @@ ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.8-ogc1.1.fc${FEDORA_VERSION}.${ARCH}}"
 ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
+# --- Context Stage ---
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
@@ -21,14 +24,17 @@ FROM ghcr.io/ublue-os/akmods-extra:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_V
 FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${KERNEL_VERSION} AS akmods-nvidia
 
 # --- Grab Brew ---
-FROM ghcr.io/ublue-os/brew:latest as brew
+FROM ghcr.io/ublue-os/brew:latest AS brew
+
 # ---
 # hyperion - base image, NO NVIDIA drivers
 # code adapted from Bazzite
 # ---
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION} AS hyperion
+
 # Install Brew
 COPY --from=brew /system_files /
+
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
@@ -53,15 +59,14 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     echo "--- Build Complete: hyperion ---"
 
 # ---
-# Hyperion Labwc
-# ---
-# ---
 # hyperion - base image with LABWC, NO NVIDIA drivers
 # code adapted from Bazzite
 # ---
 FROM ${BASE_IMAGE_WM} AS hyperion-labwc
+
 # Install Brew
 COPY --from=brew /system_files /
+
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
@@ -83,61 +88,54 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion ---"
+    echo "--- Build Complete: hyperion-labwc ---"
 
+# ---
+# hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
+# code adapted from Bazzite
+# ---
+FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
 
+# Install Brew
+COPY --from=brew /system_files /
 
-    # ---
-    # Hyperion GNOME
-    # ---
-    # ---
-    # hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
-    # code adapted from Bazzite
-    # ---
-    FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
-    # Install Brew
-    COPY --from=brew /system_files /
-    # Make OPT immutable to allow for Zen browser and extra packages to work
-    RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
+# Make OPT immutable to allow for Zen browser and extra packages to work
+RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
 
-    RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-        --mount=type=cache,dst=/var/cache \
-        --mount=type=cache,dst=/var/log \
-        --mount=type=tmpfs,dst=/tmp \
-        --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-        --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
-        --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
-        --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
-        --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
-        /usr/bin/systemctl preset brew-setup.service && \
-        /usr/bin/systemctl preset brew-update.timer && \
-        /usr/bin/systemctl preset brew-upgrade.timer && \
-        /ctx/build.sh && \
-        /ctx/desktop.sh && \
-        /ctx/akmods.sh && \
-        /ctx/os-release.sh && \
-        /ctx/initramfs.sh && \
-        /ctx/cleanup.sh && \
-        echo "--- Build Complete: hyperion-gnome ---"
-
-
-
-
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
+    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
+    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
+    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
+    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    /usr/bin/systemctl preset brew-setup.service && \
+    /usr/bin/systemctl preset brew-update.timer && \
+    /usr/bin/systemctl preset brew-upgrade.timer && \
+    /ctx/build.sh && \
+    /ctx/desktop.sh && \
+    /ctx/akmods.sh && \
+    /ctx/os-release.sh && \
+    /ctx/initramfs.sh && \
+    /ctx/cleanup.sh && \
+    echo "--- Build Complete: hyperion-gnome ---"
 
 # Logic to make OPT back to be mutable in the image - disabled for now
 # RUN echo "-- Reverting OPT changes ---"
 # RUN set -euo pipefail && \
-#    if [ -d /opt ] && [ -d /var/opt ]; then \
-#        # Merge /opt into /var/opt
-#        cp -a /opt/. /var/opt/; \
-#        # Remove the old /opt directory
-#        rm -rf /opt; \
-#    elif [ -d /opt ] && [ ! -e /var/opt ]; then \
-#        # If /var/opt doesn't exist yet, simply move /opt there
-#        mv /opt /var/opt; \
-#    fi && \
-#    # Create the symbolic link pointing /opt to /var/opt
-#    ln -s /var/opt /opt
+#     if [ -d /opt ] && [ -d /var/opt ]; then \
+#         # Merge /opt into /var/opt
+#         cp -a /opt/. /var/opt/; \
+#         # Remove the old /opt directory
+#         rm -rf /opt; \
+#     elif [ -d /opt ] && [ ! -e /var/opt ]; then \
+#         # If /var/opt doesn't exist yet, simply move /opt there
+#         mv /opt /var/opt; \
+#     fi && \
+#     # Create the symbolic link pointing /opt to /var/opt
+#     ln -s /var/opt /opt
 
 ### LINTING
 RUN bootc container lint
@@ -146,6 +144,7 @@ RUN bootc container lint
 # hyperion-nvidia - Add the NVIDIA DRIVERS
 # ---
 FROM hyperion AS hyperion-nvidia
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -164,6 +163,7 @@ RUN bootc container lint
 # hyperion-labwc-nvidia - Add the NVIDIA DRIVERS
 # ---
 FROM hyperion-labwc AS hyperion-labwc-nvidia
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -173,18 +173,16 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/initramfs.sh && \
     /ctx/os-release.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion-nvidia ---"
+    echo "--- Build Complete: hyperion-labwc-nvidia ---"
 
 ### LINTING
 RUN bootc container lint
-
-
-
 
 # ---
 # hyperion-asus - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image. Now Merged with HTPC
 # ---
 FROM hyperion AS hyperion-asus
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -203,6 +201,7 @@ RUN bootc container lint
 # hyperion-asus-gnome - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image. Now Merged with HTPC
 # ---
 FROM hyperion-gnome AS hyperion-asus-gnome
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -216,3 +215,35 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 
 ### LINTING
 RUN bootc container lint
+
+# ---
+# hyperion TESTING - base image, NO NVIDIA drivers
+# code adapted from Bazzite
+# ---
+FROM ${BASE_IMAGE_45} AS hyperion-testing
+
+# Install Brew
+COPY --from=brew /system_files /
+
+# Make OPT immutable to allow for Zen browser and extra packages to work
+RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
+
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
+    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
+    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
+    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
+    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    /usr/bin/systemctl preset brew-setup.service && \
+    /usr/bin/systemctl preset brew-update.timer && \
+    /usr/bin/systemctl preset brew-upgrade.timer && \
+    /ctx/build.sh && \
+    /ctx/desktop.sh && \
+    /ctx/akmods.sh && \
+    /ctx/os-release.sh && \
+    /ctx/initramfs.sh && \
+    /ctx/cleanup.sh && \
+    echo "--- Build Complete: hyperion-testing ---"
