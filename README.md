@@ -15,7 +15,6 @@
 
 ## 🎯 Features
 
-- 4 Images tailored for your device: Main bundles all the core features, NVIDIA adds NVIDIA drivers, ASUS adds ASUS drivers, and the HTPC image adds the steam deck like functionality
 - Optimized for gaming
 - AI/ML and 3D application support (These apps aren't installed by default as of yet, but the system itself should have the correct dependencies)
 - Based on Fedora Linux and Universal Blue
@@ -26,9 +25,14 @@
 
 - Hyperion - the base hyperion image - includes all main features WITHOUT the NVIDIA drivers (Compatible with AMD/INTEL GPU's and NVIDIA using the NVK driver)
 - Hyperion-ASUS - identical to 'hyperion', but with asus related tools installed
-- Hyperion-HTPC - meant for handhelds, with the steam big picture mode session enabled by default
 - Hyperion-LABWC - EXPERIMENTAL image created using the LABWC wayland compositor - dots hosted at a another repo (https://github.com/tj5minop/tj5-de) - uses Noctalia shell
 - Hyperion-NVIDIA - identical to the LABWC image but with the NVIDIA drivers installed
+-
+### GNOME IMAGES
+- Hyperion-GNOME - Base GNOME image for hyperion. 
+- Hyperion-ASUS-GNOME - GNOME image with extra ASUS drivers.
+
+#### NOTE - THE HTPC Image has been merged with the ASUS image for better maintainability
 
 ## 👥 Credits
 
