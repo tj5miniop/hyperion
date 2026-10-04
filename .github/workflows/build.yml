@@ -28,18 +28,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Main Images
           - image_flavour: main
             image_suffix: ""
             containerfile_target: hyperion
-            rechunk: false
+          - image_flavour: gnome
+            image_suffix: "-gnome"
+            containerfile_target: hyperion-gnome
+            rechunk: true
+          # Refined Images
           - image_flavour: asus
             image_suffix: "-asus"
             containerfile_target: hyperion-asus
             rechunk: false
-          - image_flavour: htpc
-            image_suffix: "-htpc"
-            containerfile_target: hyperion-htpc
+          - image_flavour: asus-gnome
+            image_suffix: "-asus-gnome"
+            containerfile_target: hyperion-asus-gnome
             rechunk: true
+          # WM Images
           - image_flavour: labwc
             image_suffix: "-labwc"
             containerfile_target: hyperion-labwc

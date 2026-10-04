@@ -4,6 +4,7 @@ ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE="${BASE_IMAGE:-ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-ghcr.io/ublue-os/base-main:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_GNOME="${BASE_IMAGE_WM:-ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}}"
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 # For the exact kernel version, use the kernel-version-checker script included in the image
 ARG KERNEL_VERSION="${KERNEL_VERSION:-7.2.8-ogc1.1.fc${FEDORA_VERSION}.${ARCH}}"
@@ -84,6 +85,45 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion ---"
 
+
+
+    # ---
+    # Hyperion GNOME
+    # ---
+    # ---
+    # hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
+    # code adapted from Bazzite
+    # ---
+    FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
+    # Install Brew
+    COPY --from=brew /system_files /
+    # Make OPT immutable to allow for Zen browser and extra packages to work
+    RUN echo "--- make OPT immutable ---" && rm /opt && mkdir /opt
+
+    RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+        --mount=type=cache,dst=/var/cache \
+        --mount=type=cache,dst=/var/log \
+        --mount=type=tmpfs,dst=/tmp \
+        --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
+        --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
+        --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
+        --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
+        --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+        /usr/bin/systemctl preset brew-setup.service && \
+        /usr/bin/systemctl preset brew-update.timer && \
+        /usr/bin/systemctl preset brew-upgrade.timer && \
+        /ctx/build.sh && \
+        /ctx/labwc.sh && \
+        /ctx/akmods.sh && \
+        /ctx/os-release.sh && \
+        /ctx/initramfs.sh && \
+        /ctx/cleanup.sh && \
+        echo "--- Build Complete: hyperion ---"
+
+
+
+
+
 # Logic to make OPT back to be mutable in the image - disabled for now
 # RUN echo "-- Reverting OPT changes ---"
 # RUN set -euo pipefail && \
@@ -142,7 +182,7 @@ RUN bootc container lint
 
 
 # ---
-# hyperion-asus - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image.
+# hyperion-asus - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image. Now Merged with HTPC
 # ---
 FROM hyperion AS hyperion-asus
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
@@ -152,6 +192,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/asus.sh && \
     /ctx/initramfs.sh && \
     /ctx/os-release.sh && \
+    /ctx/htpc.sh && \
     /ctx/cleanup.sh && \
     echo "--- Build Complete: hyperion-asus ---"
 
@@ -159,18 +200,19 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 RUN bootc container lint
 
 # ---
-# hyperion-htpc - FULL SteamOS-Like variant of Hypeiron - based on hyperion-ASUS to keep the extra battery management tools, which should also work on ROG ally
+# hyperion-asus-gnome - adds ASUS-CTL - allowing for battery management: also will add OGUI and Gamescope Session capabilities to make a full SteamOS-like image. Now Merged with HTPC
 # ---
-FROM hyperion-asus AS hyperion-htpc
+FROM hyperion-gnome AS hyperion-asus-gnome
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/htpc.sh && \
+    /ctx/asus.sh && \
     /ctx/initramfs.sh && \
     /ctx/os-release.sh && \
+    /ctx/htpc.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion-HTPC ---"
+    echo "--- Build Complete: hyperion-asus-gnome ---"
 
 ### LINTING
 RUN bootc container lint
