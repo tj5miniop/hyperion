@@ -90,7 +90,7 @@ curl -L https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/do
 curl -L https://github.com/hydralauncher/hydra/releases/download/v$HYDRA_VER/hydralauncher-$HYDRA_VER.x86_64.rpm --output hydra.rpm
 curl -L https://github.com/Faugus/faugus-launcher/releases/download/$FAUGUS_VER/faugus-launcher-$FAUGUS_VER-1.fc44.noarch.rpm --output faugus.rpm
 
-dnf -y install ./*.rpm --allowerasing
+dnf -y install ./*.rpm --allowerasing --skip-broken
 
 # ---------------------------
 # ------- SystemD ----------=
