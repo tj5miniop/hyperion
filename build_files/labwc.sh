@@ -5,7 +5,7 @@ set -ouex pipefail
 # Base Desktop (Labwc)
 dnf5 -y install \
     NetworkManager xorg-x11-server-Xwayland wayland-utils \
-    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools sassc xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk jetbrains-mono-fonts-all
+    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools kernel-modules kernel-modules-extra sassc xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk jetbrains-mono-fonts-all
 # Noctalia
 dnf5 -y install noctalia-nightly
 # Install theming apps

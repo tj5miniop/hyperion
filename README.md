@@ -23,14 +23,11 @@
 ---
 ## Available Images 
 
-- Hyperion - the base hyperion image - includes all main features WITHOUT the NVIDIA drivers (Compatible with AMD/INTEL GPU's and NVIDIA using the NVK driver)
-- Hyperion-ASUS - identical to 'hyperion', but with asus related tools installed
-- Hyperion-LABWC - EXPERIMENTAL image created using the LABWC wayland compositor - dots hosted at a another repo (https://github.com/tj5minop/tj5-de) - uses Noctalia shell
-- Hyperion-NVIDIA - identical to the LABWC image but with the NVIDIA drivers installed
--
-### GNOME IMAGES
-- Hyperion-GNOME - Base GNOME image for hyperion. 
-- Hyperion-ASUS-GNOME - GNOME image with extra ASUS drivers.
+After careful consideration, only 3 images are being shipped 
+
+- Hyperion: Stock hyperion with the KDE plasma desktop environment, shipped with the NVIDIA-OPEN driverset.
+- Hypeiron-GNOME: Hyperion, specifically made for laptop/ASUS devices. DOES NOT SHIP WITH THE NVIDIA DRIVERS.
+- Hyperion-LABWC - a stock, customizable vairant of Hyperion with the NVIDIA drivers, built with LY, LABWC and Noctalia installed.
 
 #### NOTE - THE HTPC Image has been merged with the ASUS image for better maintainability
 

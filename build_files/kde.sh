@@ -1,8 +1,8 @@
-#!/bin/bash
 #
 # Hyperion Desktop Edition (KDE) files - any app/setting not present in LABWC lives here
 # Very Minimal at the MOMENT
-#
+
+#!/bin/bash
 
 # Install base packages
 echo "--- installing KDE base packages... --- - KDE EDITION"
@@ -36,8 +36,6 @@ git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
 bash ./install.sh
 
 cd /tmp
-
-
 # ----------------------------
 # ---- Copy System Files -----
 # ----------------------------

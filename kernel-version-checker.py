@@ -13,8 +13,8 @@ def check_kernel_versioning():
     # Set kernel based on selection
     kernel = "ogc" if q_choice == "OGC" else "standard"
     
-    print("This automatically assumes you want Fedora 44")
-    fedora_version = "44"
+    print("This automatically assumes you want Fedora 45")
+    fedora_version = "45"
     
     # Prompt user for kernel version
     kernel_version = questionary.select(
