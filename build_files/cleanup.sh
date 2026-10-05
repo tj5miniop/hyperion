@@ -6,7 +6,7 @@ rm -rf /run/* || true
 rm -rf /var/log/dnf5.log || true
 rm -rf /boot/* || true
 rm -rf /boot/.* || true
-rm -rf /usr/etc/* || true
+rm -rf /usr/etc || true
 set -eoux pipefail
 
 dnf5 config-manager setopt keepcache=0
@@ -65,5 +65,3 @@ rm -rf \
     /etc/gshadow- \
     /etc/subuid- \
     /etc/subgid- \
-
-

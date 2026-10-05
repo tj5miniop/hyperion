@@ -44,6 +44,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/kde.sh && \
     /ctx/akmods.sh && \
@@ -54,7 +55,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     echo "--- Build Complete: hyperion ---"
 
 # ---
-# hyperion - minimal base image with LABWC, NO NVIDIA drivers
+# hyperion - minimal base image with LABWC, WITH NVIDIA drivers
 # ---
 FROM ${BASE_IMAGE_WM} AS hyperion-labwc
 
@@ -70,6 +71,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
+    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/labwc.sh && \
     /ctx/akmods.sh && \
