@@ -46,13 +46,16 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/kde.sh && \
+    /ctx/modules/desktop/gnome.sh && \
+    /ctx/modules/desktop/kde.sh && \
+    /ctx/modules/desktop/labwc.sh && \
+    /ctx/modules/hardware/asus.sh && \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion ---"
+    echo "--- Build Complete ---"
 
 # ---
 # hyperion - minimal base image with LABWC, WITH NVIDIA drivers
