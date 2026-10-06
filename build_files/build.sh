@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Load utility functions
-source lib/utils.sh
+source ./lib/utils.sh
 
 log_info "Starting Hyperion base build..."
 
