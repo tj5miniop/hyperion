@@ -46,12 +46,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/kde.sh && \
-    /ctx/akmods.sh && \
-    /ctx/nvidia.sh && \
-    /ctx/os-release.sh && \
-    /ctx/initramfs.sh && \
-    /ctx/cleanup.sh && \
+    /ctx/modules/desktop/kde.sh && \
+    /ctx/modules/bootc/akmods.sh && \
+    /ctx/modules/hardware/nvidia.sh && \
+    /ctx/modules/misc/os-release.sh && \
+    /ctx/modules/bootc/initramfs.sh && \
+    /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion ---"
 
 # ---
@@ -73,12 +73,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/labwc.sh && \
-    /ctx/akmods.sh && \
-    /ctx/nvidia.sh && \
-    /ctx/os-release.sh && \
-    /ctx/initramfs.sh && \
-    /ctx/cleanup.sh && \
+    /ctx/modules/desktop/labwc.sh && \
+    /ctx/modules/bootc/akmods.sh && \
+    /ctx/modules/desktop/nvidia.sh && \
+    /ctx/modules/misc/os-release.sh && \
+    /ctx/modules/bootc/initramfs.sh && \
+    /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-labwc ---"
 
 # ---
@@ -99,12 +99,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     /ctx/build.sh && \
-    /ctx/gnome.sh && \
-    /ctx/asus.sh && \
-    /ctx/akmods.sh && \
-    /ctx/os-release.sh && \
-    /ctx/initramfs.sh && \
-    /ctx/cleanup.sh && \
+    /ctx/modules/desktop/gnome.sh && \
+    /ctx/modules/hardware/asus.sh && \
+    /ctx/modules/bootc/akmods.sh && \
+    /ctx/modules/misc/os-release.sh && \
+    /ctx/modules/bootc/initramfs.sh && \
+    /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-gnome ---"
 
 ### LINTING
