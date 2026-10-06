@@ -3,7 +3,7 @@
 ARG FEDORA_VERSION="${FEDORA_VERSION:-45}"
 ARG ARCH="${ARCH:-x86_64}"
 
-# Base images (Using official quay.io/fedora repositories)
+# Base images (Using official quay.io/fedora-kinoite/fedora-silverblue/fedora-bootc repositories)
 ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-quay.io/fedora/fedora-kinoite:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-quay.io/fedora/fedora-bootc:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-quay.io/fedora/fedora-silverblue:${FEDORA_VERSION}}"
@@ -46,10 +46,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/modules/desktop/gnome.sh && \
     /ctx/modules/desktop/kde.sh && \
-    /ctx/modules/desktop/labwc.sh && \
-    /ctx/modules/hardware/asus.sh && \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
     /ctx/os-release.sh && \
@@ -76,13 +73,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/labwc.sh && \
+    /ctx/modules/desktop/labwc.sh && \
     /ctx/akmods.sh && \
     /ctx/nvidia.sh && \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion-labwc ---"
+    echo "--- Build Complete ---"
 
 # ---
 # hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
@@ -102,13 +99,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     /ctx/build.sh && \
-    /ctx/gnome.sh && \
-    /ctx/asus.sh && \
+    /ctx/modules/desktop/gnome.sh && \
+    /ctx/modules/hardware/asus.sh && \
     /ctx/akmods.sh && \
     /ctx/os-release.sh && \
     /ctx/initramfs.sh && \
     /ctx/cleanup.sh && \
-    echo "--- Build Complete: hyperion-gnome ---"
+    echo "--- Build Complete ---"
 
 ### LINTING
 RUN bootc container lint

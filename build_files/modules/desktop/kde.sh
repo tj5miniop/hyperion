@@ -1,16 +1,14 @@
-#
-# Hyperion Desktop Edition (KDE) files - any app/setting not present in LABWC lives here
-# Very Minimal at the MOMENT
-
 #!/bin/bash
+# Set error handling and load utilities
+set -euo pipefile
+source build_files/lib/utils.sh
 
-# Install base packages
-echo "--- installing KDE base packages... --- - KDE EDITION"
+# Install KDE base packages
+log_info "Installing KDE base packages..."
 dnf -y install ghostty kvantum
-echo "--- installing KDE/GNOME apps -- - KDE EDITION"
 
-# Remove certain bundled packages
-echo " --- Removing certain native packages... ---"
+# Remove default KDE-bundled packages
+log_info "Removing native KDE packages..."
 dnf -y remove \
     firefox \
     konsole \
@@ -18,26 +16,22 @@ dnf -y remove \
     haruna \
     kwrite \
     kate \
-    plasma-systemmonitor \
+    plasma-systemmonitor
 
-# ---------------------------
-# ------- Theming -----------
-# ---------------------------
-# This section of the script does not directly set up the dotfiles but will install all dependencies
-# Papirus Icons
+# Install Papirus Icons
+log_info "Installing Papirus icons..."
 dnf5 -y install papirus-icon-theme
 
-# Install Layan theme for KDE
-echo "--- Layan Theme - CREDIT VINCELLUICE ---"
-DIR_Layan=/tmp/themes/
+# Install Layan theme (Credit: Vinceliuice)
+log_info "Installing Layan KDE theme..."
+DIR_THEMES=/tmp/themes/
 REPO_NAME=Layan-kde
-mkdir -p $DIR_Layan && cd $DIR_Layan
-git clone https://github.com/vinceliuice/"$REPO_NAME" && cd $REPO_NAME
+mkdir -p "$DIR_THEMES" && cd "$DIR_THEMES"
+git clone https://github.com/vinceliuice/"$REPO_NAME" && cd "$REPO_NAME"
 bash ./install.sh
 
-cd /tmp
-# ----------------------------
-# ---- Copy System Files -----
-# ----------------------------
-# Copy all files to root directory
+# Copy KDE system files to root directory
+log_info "Copying KDE configuration files..."
 cp -avf "/ctx/system_files/kde"/. /
+
+log_success "KDE module complete."
