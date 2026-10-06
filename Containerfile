@@ -75,7 +75,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh && \
     /ctx/modules/desktop/labwc.sh && \
     /ctx/modules/bootc/akmods.sh && \
-    /ctx/modules/desktop/nvidia.sh && \
+    /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
     /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
