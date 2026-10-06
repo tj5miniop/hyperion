@@ -19,7 +19,7 @@ def check_kernel_versioning():
     # Prompt user for kernel version
     kernel_version = questionary.select(
         "Which Kernel Version do you want?",
-        choices=["7.0", "7.1", "7.2"]
+        choices=["7.0", "7.1", "7.2", "7.3"]
     ).ask()
     
     # Build the command string
