@@ -2,8 +2,9 @@
 # Ensure that if any errors occur, the script will stop
 set -euo pipefail
 
+# No idea why this is not working so disabling for now, not necessarily needed
 # Load utility functions
-source /build_files/lib/utils.sh
+# source /build_files/lib/utils.sh
 
 log_info "Starting Hyperion base build..."
 
