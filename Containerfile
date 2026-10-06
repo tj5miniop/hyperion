@@ -3,7 +3,7 @@
 ARG FEDORA_VERSION="${FEDORA_VERSION:-45}"
 ARG ARCH="${ARCH:-x86_64}"
 
-# Base images (Using official quay.io/fedora-kinoite/fedora-silverblue/fedora-bootc repositories)
+# Base images (Using official fedora-kinoite/fedora-silverblue/fedora-bootc repositories)
 ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-quay.io/fedora/fedora-kinoite:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-quay.io/fedora/fedora-bootc:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-quay.io/fedora/fedora-silverblue:${FEDORA_VERSION}}"
@@ -17,10 +17,11 @@ ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
 
 # --- Context Stage ---
-# Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
-COPY build_files /
-COPY system_files /system_files
+# We copy the contents of build_files into /ctx/ so that build.sh is at /ctx/build.sh
+# and lib/utils.sh is at /ctx/lib/utils.sh
+COPY build_files /ctx/
+COPY system_files /ctx/system_files
 
 # --- Grab AKMODS ---
 FROM ghcr.io/ublue-os/akmods:${KERNEL_FLAVOR}-${KERNEL_VERSION} AS akmods
@@ -44,7 +45,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
     --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
-    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
+    --mount=type-bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/modules/desktop/kde.sh && \
     /ctx/akmods.sh && \
