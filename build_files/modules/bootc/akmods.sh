@@ -32,13 +32,13 @@ dnf5 -y install \
 dnf5 versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel-modules
 
 # Changes here; Removed some kmods as not used by me
-/ctx/install-kmods.sh \
+/ctx/modules/bootc/install-kmods.sh \
     /tmp/rpms/{common,kmods}/*kvmfr*.rpm \
     /tmp/rpms/{common,kmods}/*openrazer*.rpm \
     /tmp/rpms/{common,kmods}/*v4l2loopback*.rpm \
     /tmp/rpms/{common,kmods}/*xone*.rpm
 
-/ctx/install-kmods.sh \
+/ctx/modules/bootc/install-kmods.sh \
     /tmp/rpms/{extra,kmods-extra}/*zenergy*.rpm \
     /tmp/rpms/{extra,kmods-extra}/*kvmfr*.rpm \
     /tmp/rpms/{extra,kmods-extra}/*hid-fanatecff*.rpm \
