@@ -20,6 +20,12 @@ dnf -y remove \
     kate \
     plasma-systemmonitor \
 
+
+# Install Plasma Widgets/Dependencies
+
+# Audio (Cava etc) 
+dnf5 -y install cava qt6-qtwebsockets-devel python-websockets
+
 # ---------------------------
 # ------- Theming -----------
 # ---------------------------
