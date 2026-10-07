@@ -1,8 +1,20 @@
 #!/bin/bash
 
 # HYPERION GNOME EDITION BUILD SCRIPT - Very Bare Bones at the moment
-
 dnf5 -y remove gnome-software firefox
+
+
+# GNOME DESKTOP CUSTOMIZATIONS
+
+# Exntensions 
+dnf5 -y install \
+  gnome-tweaks \
+  gnome-shell-extensions \
+  gnome-shell-extensions-common \
+  gnome-shell-extension-caffeine \
+  gnome-shell-extension-just-perfection \
+  gnome-shell-extension-dash-to-dock \
+
 
 # Theme installation
 
