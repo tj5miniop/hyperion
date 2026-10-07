@@ -7,7 +7,7 @@ dnf5 -y remove gnome-software firefox
 # GNOME DESKTOP CUSTOMIZATIONS
 
 # Exntensions 
-dnf5 -y install \
+dnf5 -y install --skip-unavailable \
   gnome-tweaks \
   gnome-shell-extensions \
   gnome-shell-extensions-common \
