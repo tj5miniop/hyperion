@@ -14,6 +14,7 @@ dnf5 -y install --skip-unavailable \
   gnome-shell-extension-caffeine \
   gnome-shell-extension-just-perfection \
   gnome-shell-extension-dash-to-dock \
+  sassc \
 
 
 # Theme installation
