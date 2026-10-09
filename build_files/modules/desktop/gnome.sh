@@ -19,6 +19,8 @@ dnf5 -y install --skip-unavailable \
 
 # Theme installation
 
+cd /tmp
+
 # Install GTK Theme
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
   (cd Colloid-gtk-theme && sudo ./install.sh --tweaks nord)

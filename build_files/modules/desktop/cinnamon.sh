@@ -20,13 +20,12 @@ dnf5 -y install zsh
 # Install other apps
 dnf5 -y install thunar pipewire wireplumber bluez bluez-tools NetworkManager-tui
 
-# Install Login Manager
-dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
 systemctl set-default graphical.target
 systemctl enable lightdm
 
+cd /tmp
 
 # Install GTK Theme
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
@@ -42,7 +41,7 @@ git clone https://github.com/vinceliuice/WhiteSur-icon-theme && \
 
 # Return back to root
 cd /
-rm -rf "$WORK_DIR_DOTS"
+
 
 # Copy LABWC files to system
 cp -avf "/ctx/system_files/labwc"/. /
