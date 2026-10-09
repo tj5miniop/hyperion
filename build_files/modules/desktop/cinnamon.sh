@@ -2,14 +2,15 @@
 set -ouex pipefail
 
 
-# Base Desktop (Labwc)
+# Base Desktop
 dnf5 -y install \
     NetworkManager xorg-x11-server-Xwayland wayland-utils \
-    quickshell labwc labwc-session alacritty git polkit polkit-kde kernel-tools-libs kernel-tools kernel-modules kernel-modules-extra sassc xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk jetbrains-mono-fonts-all
-# Noctalia
-dnf5 -y install noctalia-nightly
-# Install theming apps
-dnf5 -y install lxappearance kvantum
+    git polkit polkit-kde kernel-tools-libs kernel-tools kernel-modules kernel-modules-extra sassc xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk jetbrains-mono-fonts-all
+
+# Install cinnamon
+dnf5 -y install cinnamon cinnamon-themes cinnamon-desktop nemo cinnamon-menus lightdm lightdm-slick-greeter mint-themes
+
+
 # Install dotfiles related tools
 dnf5 -y install stow
 
@@ -24,11 +25,9 @@ dnf5 -y install ly
 # Enable SystemD Stuff
 systemctl enable NetworkManager
 systemctl set-default graphical.target
-systemctl enable ly@tty1
-# Install dotfiles - REMOVED - now replaced with Themes
-WORK_DIR_DOTS=/tmp/dots/
-mkdir -p $WORK_DIR_DOTS
-cd $WORK_DIR_DOTS
+systemctl enable lightdm
+
+
 # Install GTK Theme
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
   (cd Colloid-gtk-theme && sudo ./install.sh --tweaks nord)

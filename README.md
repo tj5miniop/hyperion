@@ -27,7 +27,7 @@ After careful consideration, only 3 images are being shipped
 
 - Hyperion: Stock hyperion with the KDE plasma desktop environment, shipped with the NVIDIA-OPEN driverset.
 - Hypeiron-GNOME: Hyperion, specifically made for laptop/ASUS devices. DOES NOT SHIP WITH THE NVIDIA DRIVERS.
-- Hyperion-LABWC - a stock, customizable vairant of Hyperion with the NVIDIA drivers, built with LY, LABWC and Noctalia installed.
+- Hyperion-Cinnamon - a stock, customizable vairant of Hyperion with the NVIDIA drivers, using the cinnamon desktop, used by Linux Mint. NOTE - the desktop will be stock so customisations will have to be done manually, best for those who perfer a classic desktop experience. 
 
 #### NOTE - THE HTPC Image has been merged with the ASUS image for better maintainability
 

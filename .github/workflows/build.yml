@@ -37,9 +37,9 @@ jobs:
             image_suffix: "-gnome"
             containerfile_target: hyperion-gnome
             rechunk: true
-          - image_flavour: labwc
-            image_suffix: "-labwc"
-            containerfile_target: hyperion-labwc
+          - image_flavour: cinnamon
+            image_suffix: "-cinnamon"
+            containerfile_target: hyperion-cinnamon
             rechunk: true
 
 

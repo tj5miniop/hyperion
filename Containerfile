@@ -10,7 +10,7 @@ ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-quay.io/fedora/fedora-silverblue:${FED
 
 # Kernels
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
-ARG KERNEL_RELEASE="7.2.8-ogc2.1"
+ARG KERNEL_RELEASE="7.2.9-ogc2.1"
 ARG KERNEL_VERSION="${FEDORA_VERSION}-${KERNEL_RELEASE}.fc${FEDORA_VERSION}.${ARCH}"
 ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
@@ -55,9 +55,9 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     echo "--- Build Complete: hyperion ---"
 
 # ---
-# hyperion - minimal base image with LABWC, WITH NVIDIA drivers
+# hyperion - minimal base image with CINNAMON DE, WITH NVIDIA drivers
 # ---
-FROM ${BASE_IMAGE_WM} AS hyperion-labwc
+FROM ${BASE_IMAGE_WM} AS hyperion-cinnamon
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
@@ -73,7 +73,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/modules/desktop/labwc.sh && \
+    /ctx/modules/desktop/cinnamon.sh && \
     /ctx/modules/bootc/akmods.sh && \
     /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
