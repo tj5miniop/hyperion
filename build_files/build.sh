@@ -35,7 +35,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git zed-nightly syncthing helium-browser-bin
+dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git codium codium-marketplace syncthing helium-browser-bin
 dnf -y install wayland-devel libwayland-client
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
