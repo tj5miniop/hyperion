@@ -20,7 +20,7 @@ dnf -y install dnf5-plugins gh
 # Install certain ublue-fixes
 echo "--- Updating/Configuring Universal Blue fixes... ---"
 dnf -y copr enable ublue-os/packages
-dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar
+dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar uupd
 dnf copr enable ublue-os/packages
 
 # Installing SElinux-Fixes
