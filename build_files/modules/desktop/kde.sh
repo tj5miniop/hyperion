@@ -9,6 +9,14 @@ echo "--- installing KDE base packages... --- - KDE EDITION"
 dnf -y install ghostty kvantum
 echo "--- installing KDE/GNOME apps -- - KDE EDITION"
 
+dnf -y install \
+    plasma-systemmonitor \
+    plasma-union \
+    plasma-oxygen \
+    plasma-bigscreen \
+    plasma-bigscreen-wayland \
+    plasma-vault \
+
 # Remove certain bundled packages
 echo " --- Removing certain native packages... ---"
 dnf -y remove \
@@ -18,12 +26,9 @@ dnf -y remove \
     haruna \
     kwrite \
     kate \
-    plasma-systemmonitor \
-    plasma-union \
-    plasma-oxygen \
-    plasma-bigscreen \
-    plasma-bigscreen-wayland \
-    plasma-vault \
+
+    
+
 
 
 # Install Plasma Widgets/Dependencies
