@@ -19,6 +19,11 @@ dnf -y remove \
     kwrite \
     kate \
     plasma-systemmonitor \
+    plasma-union \
+    plasma-oxygen \
+    plasma-bigscreen \
+    plasma-bigscreen-wayland \
+    plasma-vault \
 
 
 # Install Plasma Widgets/Dependencies
