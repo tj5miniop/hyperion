@@ -10,7 +10,7 @@
 ---
 
 ## 📌 Important Notes
-- **Secure Boot is Currently not supported** - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
+- **Secure Boot is Currently not supported**  on the main images, a Bazzite-Based image is in the works so this will be used as a baseline - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
 ---
 
 ## 🎯 Features
