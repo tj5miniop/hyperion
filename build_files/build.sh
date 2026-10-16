@@ -35,7 +35,7 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git codium codium-marketplace syncthing helium-browser-bin
+dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git syncthing
 dnf -y install wayland-devel libwayland-client
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor
@@ -66,35 +66,14 @@ dnf -y copr disable bieszczaders/kernel-cachyos-addons
 # AppImage Support rework
 dnf -y install fuse fuse3 fuse-libs fuse3-libs
 
-# Install Tailscale
-curl -fsSL https://tailscale.com/install.sh | sh
+# Install Tailscale - Should be available in brew now
+# curl -fsSL https://tailscale.com/install.sh | sh
 
 # ----------------------------
 # ---- Copy System Files -----
 # ----------------------------
 # Copy all files to root directory
 cp -avf "/ctx/system_files/shared"/. /
-# ----------------------------
-# --- Install misc RPMs ------
-# ----------------------------
-
-# Disclaimer
-# Heroic Games Launcher - Allows for Epic Games, Amazon and GOG games
-# Faugus - Allows for standalone games/apps or other launchers to be installed
-# Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
-
-HEROIC_VER=2.22.3 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
-HYDRA_VER=4.1.5 # Source https://github.com/hydralauncher/hydra/
-FAUGUS_VER=2.4.2 # Source https://github.com/Faugus/faugus-launcher
-DIR_RPMS=/tmp/local-rpms/
-mkdir -p $DIR_RPMS
-cd "$DIR_RPMS" || exit 1
-
-curl -L https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v$HEROIC_VER/Heroic-$HEROIC_VER-linux-x86_64.rpm --output heroic.rpm
-curl -L https://github.com/hydralauncher/hydra/releases/download/v$HYDRA_VER/hydralauncher-$HYDRA_VER.x86_64.rpm --output hydra.rpm
-curl -L https://github.com/Faugus/faugus-launcher/releases/download/$FAUGUS_VER/faugus-launcher-$FAUGUS_VER-1.fc44.noarch.rpm --output faugus.rpm
-
-dnf -y install ./*.rpm --allowerasing --skip-broken
 
 # ---------------------------
 # ------- SystemD ----------=

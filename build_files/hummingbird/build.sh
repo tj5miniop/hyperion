@@ -23,34 +23,22 @@ dnf -y install dnf5-plugins gh --skip-unavailable --skip-broken
 # -------- DNF Stuff ---------
 # ----------------------------
 
-# Install certain ublue-fixes
-echo "--- Updating/Configuring Universal Blue fixes... ---"
-dnf -y copr enable ublue-os/packages
-dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar uupd --skip-unavailable --skip-broken
-dnf copr enable ublue-os/packages
+# Install certain ublue-fixes - Not need atm as 
+#echo "--- Updating/Configuring Universal Blue fixes... ---"
+#dnf -y copr enable ublue-os/packages
+#dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar uupd --skip-unavailable --skip-broken
+#dnf copr enable ublue-os/packages
 
 # Installing SElinux-Fixes
 echo "--- installing SELINUX FIXES... ---"
 dnf -y install selinux-policy-targeted
 
-# Enable Terra repo
-dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release --skip-unavailable --skip-broken
-
-# Configure terra repo
-dnf -y install terra-release-extras
-
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git codium codium-marketplace syncthing helium-browser-bin --skip-unavailable --skip-broken
+dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git syncthing --skip-unavailable --skip-broken
 dnf -y install wayland-devel libwayland-client --skip-unavailable --skip-broken
 echo "--- installing KDE/GNOME apps --"
 dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor --skip-unavailable --skip-broken
-# Install Gaming Stuff
-echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam protonplus protontricks gamemode --skip-unavailable --skip-broken
-dnf -y install powerbuttond inputplumber --skip-unavailable --skip-broken
-dnf -y install gamescope --skip-unavailable --skip-broken
-dnf -y install gamemode mangohud --skip-unavailable --skip-broken
 
 # install python devel packages
 dnf -y install --skip-unavailable --skip-broken \
@@ -71,36 +59,12 @@ dnf -y install virt-manager libvirt qemu edk2-ovmf swtpm --skip-unavailable --sk
 
 # AppImage Support rework
 #dnf -y install fuse fuse3 fuse-libs fuse3-libs
-
-# Install Tailscale
-#curl -fsSL https://tailscale.com/install.sh | sh
-
+# Install Tailscale#curl -fsSL https://tailscale.com/install.sh | sh
 # ----------------------------
 # ---- Copy System Files -----
 # ----------------------------
 # Copy all files to root directory
 cp -avf "/ctx/system_files/shared"/. /
-# ----------------------------
-# --- Install misc RPMs ------
-# ----------------------------
-
-# Disclaimer
-# Heroic Games Launcher - Allows for Epic Games, Amazon and GOG games
-# Faugus - Allows for standalone games/apps or other launchers to be installed
-# Hydra Launcher - has similar functionality to Faugus but has achievments, optional paid cloud saves: based on my testing, some games work better on here on Faugus
-
-HEROIC_VER=2.22.3 # Source https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
-HYDRA_VER=4.1.5 # Source https://github.com/hydralauncher/hydra/
-FAUGUS_VER=2.4.2 # Source https://github.com/Faugus/faugus-launcher
-DIR_RPMS=/tmp/local-rpms/
-mkdir -p $DIR_RPMS
-cd "$DIR_RPMS" || exit 1
-
-curl -L https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v$HEROIC_VER/Heroic-$HEROIC_VER-linux-x86_64.rpm --output heroic.rpm
-curl -L https://github.com/hydralauncher/hydra/releases/download/v$HYDRA_VER/hydralauncher-$HYDRA_VER.x86_64.rpm --output hydra.rpm
-curl -L https://github.com/Faugus/faugus-launcher/releases/download/$FAUGUS_VER/faugus-launcher-$FAUGUS_VER-1.fc44.noarch.rpm --output faugus.rpm
-
-dnf -y install ./*.rpm --allowerasing --skip-unavailable --skip-broken
 
 # ---------------------------
 # ------- SystemD ----------=
@@ -109,8 +73,8 @@ dnf -y install ./*.rpm --allowerasing --skip-unavailable --skip-broken
 # podman
 systemctl enable podman.socket
 
-# libvirtd
-systemctl enable libvirtd
+# libvirtd - disable for now
+# systemctl enable libvirtd
 
 
 # ---------------------------
@@ -118,4 +82,4 @@ systemctl enable libvirtd
 # ---------------------------
 
 # Topgrade
-dnf5 -y install topgrade
+dnf5 -y install topgrade --skip-unavailable --skip-broken
