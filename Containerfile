@@ -7,8 +7,8 @@ ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/aurora-nvidia-open:latest}"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-ghcr.io/ublue-os/bluefin:${FEDORA_VERSION}}"
 
-# BLuefin UTAH images are in PROTOTYPE Stages - NO secureboot stuff yet  - always grab the latest
-ARG BASE_IMAGE_UTAH="${BASE_IMAGE_UTAH:-ghcr.io/projectbluefin/utah-nvidia-gaming:latest}"
+# BLuefin UTAH images are in PROTOTYPE Stages - NO secureboot stuff yet  - always grab the latest - use testing tag as this is what is used upstream
+ARG BASE_IMAGE_UTAH="${BASE_IMAGE_UTAH:-ghcr.io/projectbluefin/utah-nvidia-gaming:testing}"
 # Kernels
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 ARG KERNEL_RELEASE="7.2.9-ogc3.1"
