@@ -4,7 +4,7 @@ ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 
 # Base images (Using official quay.io/fedora repositories)
-ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/aurora-nvidia-open:latest}"
+ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-quay.io/fedora/fedora-kinoite:${FEDORA_VERSION}}"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-ghcr.io/ublue-os/bluefin:${FEDORA_VERSION}}"
 
 # BLuefin UTAH images are in PROTOTYPE Stages - NO secureboot stuff yet  - always grab the latest - use testing tag as this is what is used upstream
@@ -48,11 +48,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/modules/desktop/kde.sh && \
+    /ctx/modules/bootc/akmods.sh && \
+    /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
+    /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion ---"
-
-# ---
 # hyperion-utah - Based on Blueifn UTAH (Gnome Desktop fedora hummingbird) with NVIDIA
 # ---
 FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
