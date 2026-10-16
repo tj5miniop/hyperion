@@ -53,7 +53,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     echo "--- Build Complete: hyperion ---"
 
 # ---
-# hyperion - minimal base image with CINNAMON DE, WITH NVIDIA drivers
+# hyperion-utah - Based on Blueifn UTAH (Gnome Desktop fedora hummingbird) with NVIDIA
 # ---
 FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
 

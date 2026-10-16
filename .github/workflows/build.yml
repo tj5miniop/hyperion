@@ -37,6 +37,10 @@ jobs:
             image_suffix: "-gnome"
             containerfile_target: hyperion-gnome
             rechunk: true
+          - image_flavour: utah
+            image_suffix: "-utah"
+            containerfile_target: hyperion-utah
+            rechunk: true
           # - image_flavour: cinnamon
             # image_suffix: "-cinnamon"
             # containerfile_target: hyperion-cinnamon
