@@ -1,13 +1,14 @@
 # --- Build Arguments ---
 # Fedora Versions
-ARG FEDORA_VERSION="${FEDORA_VERSION:-45}"
+ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 
 # Base images (Using official quay.io/fedora repositories)
-ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-quay.io/fedora/fedora-kinoite:${FEDORA_VERSION}}"
-ARG BASE_IMAGE_WM="${BASE_IMAGE_WM:-quay.io/fedora/fedora-bootc:${FEDORA_VERSION}}"
-ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-quay.io/fedora/fedora-silverblue:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/aurora-nvidia-open:latest}"
+ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-ghcr.io/ublue-os/bluefin:${FEDORA_VERSION}}"
 
+# BLuefin UTAH images are in PROTOTYPE Stages - NO secureboot stuff yet  - always grab the latest
+ARG BASE_IMAGE_UTAH="${BASE_IMAGE_UTAH:-ghcr.io/projectbluefin/utah-nvidia-gaming:latest}"
 # Kernels
 ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
 ARG KERNEL_RELEASE="7.2.9-ogc3.1"
@@ -47,17 +48,14 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/modules/desktop/kde.sh && \
-    /ctx/modules/bootc/akmods.sh && \
-    /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
-    /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion ---"
 
 # ---
 # hyperion - minimal base image with CINNAMON DE, WITH NVIDIA drivers
 # ---
-FROM ${BASE_IMAGE_WM} AS hyperion-cinnamon
+FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
 RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
@@ -66,18 +64,8 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
-    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
-    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
-    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
-    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
-    /ctx/modules/desktop/cinnamon.sh && \
-    /ctx/modules/bootc/akmods.sh && \
-    /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
-    /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-labwc ---"
 
@@ -100,10 +88,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     /ctx/build.sh && \
     /ctx/modules/desktop/gnome.sh && \
-    /ctx/modules/hardware/asus.sh && \
-    /ctx/modules/bootc/akmods.sh && \
     /ctx/modules/misc/os-release.sh && \
-    /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-gnome ---"
 
