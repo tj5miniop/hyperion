@@ -65,7 +65,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build.sh && \
+    /ctx/hummingbird/build.sh && \
     /ctx/modules/misc/os-release.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-labwc ---"
