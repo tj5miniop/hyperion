@@ -32,8 +32,7 @@ cp -avf "/ctx/system_files/hummingbird"/. /
 # update dnf so it detects new changes
 # Set priority of repo to the lowest, so therefore Fedora Rawhide packages are only here to help bridge some gaps 
 
-sudo dnf update -y
-sudo dnf clean all -y
+#sudo dnf update -y
 
 # Install certain ublue-fixes - Not need atm as a universal blue script is used  
 #echo "--- Updating/Configuring Universal Blue fixes... ---"
@@ -69,10 +68,12 @@ dnf -y --enable-repo=fedora-44,fedora-44-updates install gh papirus-icon-theme s
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-44.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-44.noarch.rpm
 dnf -y config-manager --set-disabled rpm-fusion*
 dnf -y install --enable-repo=rpm-fusion* ffmpeg 
-
+dnf clean all -y
 # Remove Repos
 rm -rf /etc/yum.repos.d/fedora-44.repo
 rm -rf /etc/yum.repos.d/rpmfusion*.repo
+
+
 # ---------------------------
 # ------- SystemD ----------=
 # ---------------------------
