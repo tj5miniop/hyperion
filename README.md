@@ -10,7 +10,8 @@
 ---
 
 ## 📌 Important Notes
-- **Secure Boot is Currently not supported**  on the main images, a Bazzite-Based image is in the works so this will be used as a baseline - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
+- **Secure Boot is Currently not supported** - may be reworked in the future - see [this issue](https://github.com/tj5miniop/hyperion/issues/3)
+- **Main Hyperion image (hyperion) is in maintenance mode** - all new features will still be added but this is subject to change to a new image (Based on a rolling release bluefin)
 ---
 
 ## 🎯 Features
@@ -27,7 +28,7 @@ After careful consideration, only 3 images are being shipped
 
 - Hyperion: Stock hyperion with the KDE plasma desktop environment, shipped with the NVIDIA-OPEN driverset.
 - Hypeiron-GNOME: Hyperion, specifically made for laptop/ASUS devices. DOES NOT SHIP WITH THE NVIDIA DRIVERS.
-- Hyperion-Cinnamon - a stock, customizable vairant of Hyperion with the NVIDIA drivers, using the cinnamon desktop, used by Linux Mint. NOTE - the desktop will be stock so customisations will have to be done manually, best for those who perfer a classic desktop experience. 
+- Hyperion-Utah - A brand new bird; Based on Project Bluefin's gaming image for Utah, a rolling release custom build of Fedora Hummingbird. With NVIDIA drivers
 
 #### NOTE - THE HTPC Image has been merged with the ASUS image for better maintainability
 
@@ -41,7 +42,7 @@ After careful consideration, only 3 images are being shipped
 
 - **[Open Gaming Collective](https://opengamingcollective.org/)**  
   Creating the [OGC kernel](https://github.com/OpenGamingCollective/linux), which is used in this system - along with other utilities such as [ScopeBuddy](https://github.com/OpenGamingCollective/ScopeBuddy) and [Cardwire](https://github.com/OpenGamingCollective/cardwire)
-
+`
 ---
 
 ## 🛠️ Technical Details
