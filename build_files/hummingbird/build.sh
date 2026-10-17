@@ -23,7 +23,13 @@ dnf -y install dnf5-plugins gh --skip-unavailable --skip-broken
 # -------- DNF Stuff ---------
 # ----------------------------
 
-# Install certain ublue-fixes - Not need atm as 
+
+# Install Terra Repository - installs Fedora Rawhide Variant
+sudo dnf install --releasever=rawhide--nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release --skip-unavailable --skip-broken
+
+
+
+# Install certain ublue-fixes - Not need atm as a universal blue script is used  
 #echo "--- Updating/Configuring Universal Blue fixes... ---"
 #dnf -y copr enable ublue-os/packages
 #dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar uupd --skip-unavailable --skip-broken
