@@ -34,7 +34,7 @@ FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${KERNEL_VERSION}
 FROM ${BASE_IMAGE_KDE} AS hyperion
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
-RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
+#RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -59,7 +59,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
-RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
+# RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -68,7 +68,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/hummingbird/build.sh && \
     /ctx/modules/misc/os-release.sh && \
     /ctx/modules/misc/cleanup.sh && \
-    echo "--- Build Complete: hyperion-labwc ---"
+    echo "--- Build Complete: hyperion-utah ---"
 
 # ---
 # hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
@@ -76,7 +76,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
 
 # Make OPT immutable to allow for Zen browser and extra packages to work
-RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
+# RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \

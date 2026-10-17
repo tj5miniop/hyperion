@@ -23,7 +23,18 @@ dnf -y install dnf5-plugins gh --skip-unavailable --skip-broken
 # -------- DNF Stuff ---------
 # ----------------------------
 
-# Install certain ublue-fixes - Not need atm as 
+
+# Copy System files
+# Copy all files to root directory
+cp -avf "/ctx/system_files/shared"/. /
+# Hummingbird-specific
+cp -avf "/ctx/system_files/hummingbird"/. /
+# update dnf so it detects new changes
+# Set priority of repo to the lowest, so therefore Fedora Rawhide packages are only here to help bridge some gaps 
+
+#sudo dnf update -y
+
+# Install certain ublue-fixes - Not need atm as a universal blue script is used  
 #echo "--- Updating/Configuring Universal Blue fixes... ---"
 #dnf -y copr enable ublue-os/packages
 #dnf -y install ublue-os-libvirt-workarounds ublue-os-selinux-workarounds ublue-os-signing ublue-motd bazaar ublue-os-media-automount-udev krunner-bazaar uupd --skip-unavailable --skip-broken
@@ -49,22 +60,14 @@ dnf -y install --skip-unavailable --skip-broken \
 echo "--- Installing Virtualisation Tools... ---"
 dnf -y install virt-manager libvirt qemu edk2-ovmf swtpm --skip-unavailable --skip-broken
 
-# Installing CachyOS addons
-#dnf -y copr enable bieszczaders/kernel-cachyos-addons
-#dnf -y swap zram-generator-defaults cachyos-settings
-# Install certain dependencies
-#dnf -y install power-profiles-daemon --allowerasing
-#dnf -y install scx-manager scx-scheds scx-tools
-#dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
-# AppImage Support rework
-#dnf -y install fuse fuse3 fuse-libs fuse3-libs
-# Install Tailscale#curl -fsSL https://tailscale.com/install.sh | sh
-# ----------------------------
-# ---- Copy System Files -----
-# ----------------------------
-# Copy all files to root directory
-cp -avf "/ctx/system_files/shared"/. /
+# Install Apps from Fedora 44, which are not available by default on Hummingbird - using icons and themes as a test
+dnf -y --enable-repo=fedora-44,fedora-44-updates install gh papirus-icon-theme sweet-gtk-theme uv python3 python3-devel fuse fuse3 fuse-common
+
+
+# Remove Repos
+rm -rf /etc/yum.repos.d/fedora-44.repo
+
 
 # ---------------------------
 # ------- SystemD ----------=
