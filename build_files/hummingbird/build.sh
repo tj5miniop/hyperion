@@ -24,10 +24,16 @@ dnf -y install dnf5-plugins gh --skip-unavailable --skip-broken
 # ----------------------------
 
 
-# Install Terra Repository - installs Fedora Rawhide Variant
-sudo dnf install --releasever=rawhide--nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release --skip-unavailable --skip-broken
+# Copy System files
+# Copy all files to root directory
+cp -avf "/ctx/system_files/shared"/. /
+# Hummingbird-specific
+cp -avf "/ctx/system_files/hummingbird"/. /
+# update dnf so it detects new changes
+# Set priority of repo to the lowest, so therefore Fedora Rawhide packages are only here to help bridge some gaps 
 
-
+sudo dnf update -y
+sudo dnf clean all -y
 
 # Install certain ublue-fixes - Not need atm as a universal blue script is used  
 #echo "--- Updating/Configuring Universal Blue fixes... ---"
@@ -55,23 +61,18 @@ dnf -y install --skip-unavailable --skip-broken \
 echo "--- Installing Virtualisation Tools... ---"
 dnf -y install virt-manager libvirt qemu edk2-ovmf swtpm --skip-unavailable --skip-broken
 
-# Installing CachyOS addons
-#dnf -y copr enable bieszczaders/kernel-cachyos-addons
-#dnf -y swap zram-generator-defaults cachyos-settings
-# Install certain dependencies
-#dnf -y install power-profiles-daemon --allowerasing
-#dnf -y install scx-manager scx-scheds scx-tools
-#dnf -y copr disable bieszczaders/kernel-cachyos-addons
 
-# AppImage Support rework
-#dnf -y install fuse fuse3 fuse-libs fuse3-libs
-# Install Tailscale#curl -fsSL https://tailscale.com/install.sh | sh
-# ----------------------------
-# ---- Copy System Files -----
-# ----------------------------
-# Copy all files to root directory
-cp -avf "/ctx/system_files/shared"/. /
+# Install Apps from Fedora 44, which are not available by default on Hummingbird - using icons and themes as a test
+dnf -y --enable-repo=fedora-44,fedora-44-updates install gh papirus-icon-theme sweet-gtk-theme uv python3 python3-devel fuse fuse3 fuse-common
 
+# Install RPM Fusion for codecs and tools 
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-44.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-44.noarch.rpm
+dnf -y config-manager --set-disabled rpm-fusion*
+dnf -y install --enable-repo=rpm-fusion* ffmpeg 
+
+# Remove Repos
+rm -rf /etc/yum.repos.d/fedora-44.repo
+rm -rf /etc/yum.repos.d/rpmfusion*.repo
 # ---------------------------
 # ------- SystemD ----------=
 # ---------------------------

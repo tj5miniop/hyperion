@@ -68,7 +68,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/hummingbird/build.sh && \
     /ctx/modules/misc/os-release.sh && \
     /ctx/modules/misc/cleanup.sh && \
-    echo "--- Build Complete: hyperion-labwc ---"
+    echo "--- Build Complete: hyperion-utah ---"
 
 # ---
 # hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
