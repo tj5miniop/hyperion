@@ -85,6 +85,8 @@ systemctl enable podman.socket
 # libvirtd
 systemctl enable libvirtd
 
+# Disable Abrupt Automatic updates with a systemd mask 
+systemctl mask bootc-fetch-apply-updates.service bootc-fetch-apply-updates.timer
 
 # ---------------------------
 # ----- Extra Utilities  ----

@@ -1,65 +1,42 @@
-# --- Build Arguments ---
-# Fedora Versions
+# ==============================================================================
+# GLOBAL BUILD ARGUMENTS
+# ==============================================================================
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
-
-# Base images (Using official quay.io/fedora repositories)
-ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-quay.io/fedora/fedora-kinoite:${FEDORA_VERSION}}"
+ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/bazzite-nvidia-open:latest"
 ARG BASE_IMAGE_GNOME="${BASE_IMAGE_GNOME:-ghcr.io/ublue-os/bluefin:${FEDORA_VERSION}}"
-
-# BLuefin UTAH images are in PROTOTYPE Stages - NO secureboot stuff yet  - always grab the latest - use testing tag as this is what is used upstream
 ARG BASE_IMAGE_UTAH="${BASE_IMAGE_UTAH:-ghcr.io/projectbluefin/utah-nvidia-gaming:testing}"
-# Kernels
-ARG KERNEL_FLAVOR="${KERNEL_FLAVOUR:-ogc}"
-ARG KERNEL_RELEASE="7.2.9-ogc3.1"
-ARG KERNEL_VERSION="${FEDORA_VERSION}-${KERNEL_RELEASE}.fc${FEDORA_VERSION}.${ARCH}"
-ARG NVIDIA_FLAVOR="${NVIDIA_FLAVOUR:-nvidia-open}"
 
-
-
-# --- Context Stage ---
-# Allow build scripts to be referenced without being copied into the final image
+# ==============================================================================
+# CONTEXT STAGE (Must be declared before any stage uses `from=ctx`)
+# ==============================================================================
 FROM scratch AS ctx
 COPY build_files /
 COPY system_files /system_files
 
-# --- Grab AKMODS ---
-FROM ghcr.io/ublue-os/akmods:${KERNEL_FLAVOR}-${KERNEL_VERSION} AS akmods
-FROM ghcr.io/ublue-os/akmods-extra:${KERNEL_FLAVOR}-${KERNEL_VERSION} AS akmods-extra
-FROM ghcr.io/ublue-os/akmods-${NVIDIA_FLAVOR}:${KERNEL_FLAVOR}-${KERNEL_VERSION} AS akmods-nvidia
 
-# ---
-# hyperion - base image, NO NVIDIA drivers
-# ---
+# ==============================================================================
+# FEDORA: hyperion (KDE Desktop - NVIDIA)
+# ==============================================================================
 FROM ${BASE_IMAGE_KDE} AS hyperion
-
-# Make OPT immutable to allow for Zen browser and extra packages to work
-#RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
-    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
-    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
-    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
-    --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/rpms/nvidia \
     /ctx/build.sh && \
     /ctx/modules/desktop/kde.sh && \
-    /ctx/modules/bootc/akmods.sh && \
-    /ctx/modules/hardware/nvidia.sh && \
     /ctx/modules/misc/os-release.sh && \
-    /ctx/modules/bootc/initramfs.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion ---"
-# hyperion-utah - Based on Blueifn UTAH (Gnome Desktop fedora hummingbird) with NVIDIA
-# ---
-FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
 
-# Make OPT immutable to allow for Zen browser and extra packages to work
-# RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
+RUN bootc container lint
+
+
+# ==============================================================================
+# FEDORA: hyperion-utah (Utah-Nvidia Gaming)
+# ==============================================================================
+FROM ${BASE_IMAGE_UTAH} AS hyperion-utah
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -70,28 +47,22 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-utah ---"
 
-# ---
-# hyperion - base image with The GNOME Desktop environment - NO NVIDIA drivers
-# ---
-FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
+RUN bootc container lint
 
-# Make OPT immutable to allow for Zen browser and extra packages to work
-# RUN echo "--- make OPT immutable ---" && rm -rf /opt && mkdir /opt
+
+# ==============================================================================
+# FEDORA: hyperion-gnome (GNOME Desktop - No NVIDIA)
+# ==============================================================================
+FROM ${BASE_IMAGE_GNOME} AS hyperion-gnome
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=akmods,src=/rpms/common,dst=/tmp/rpms/common \
-    --mount=type=bind,from=akmods,src=/rpms/kmods,dst=/tmp/rpms/kmods \
-    --mount=type=bind,from=akmods-extra,src=/rpms/extra,dst=/tmp/rpms/extra \
-    --mount=type=bind,from=akmods-extra,src=/rpms/kmods,dst=/tmp/rpms/kmods-extra \
     /ctx/build.sh && \
     /ctx/modules/desktop/gnome.sh && \
     /ctx/modules/misc/os-release.sh && \
     /ctx/modules/misc/cleanup.sh && \
     echo "--- Build Complete: hyperion-gnome ---"
 
-### LINTING
 RUN bootc container lint

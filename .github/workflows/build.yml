@@ -41,11 +41,6 @@ jobs:
             image_suffix: "-utah"
             containerfile_target: hyperion-utah
             rechunk: false
-          # - image_flavour: cinnamon
-            # image_suffix: "-cinnamon"
-            # containerfile_target: hyperion-cinnamon
-            # rechunk: true
-
 
     permissions:
       contents: read
