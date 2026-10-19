@@ -86,6 +86,3 @@ systemctl mask bootc-fetch-apply-updates.service bootc-fetch-apply-updates.timer
 # ---------------------------
 # ----- Extra Utilities  ----
 # ---------------------------
-
-# Topgrade
-dnf5 -y install topgrade
