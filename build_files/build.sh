@@ -35,16 +35,16 @@ dnf -y install terra-release-extras
 
 # Install base packages
 echo "--- installing base packages... ---"
-dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git syncthing --skip-unavailable 
+dnf -y install vlc ffmpeg flatpak podman podman-compose distrobox fastfetch uv git syncthing --skip-unavailable --skip-broken
 dnf -y install wayland-devel libwayland-client
 echo "--- installing KDE/GNOME apps --"
-dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor --skip-unavailable 
+dnf -y install koko gnome-disk-utility gnome-text-editor gnome-system-monitor --skip-unavailable --skip-broken
 # Install Gaming Stuff
 echo "--- installing Gaming Utilities/Tools... ---"
-dnf -y install steam protonplus protontricks gamemode --skip-unavailable 
-dnf -y install powerbuttond inputplumber --skip-unavailable 
-dnf -y install gamescope --skip-unavailable 
-dnf -y install gamemode mangohud --skip-unavailable 
+dnf -y install steam protonplus protontricks gamemode --skip-unavailable --skip-broken
+dnf -y install powerbuttond inputplumber --skip-unavailable --skip-broken
+dnf -y install gamescope --skip-unavailable --skip-broken
+dnf -y install gamemode mangohud --skip-unavailable --skip-broken
 
 # install python devel packages
 dnf -y install \
