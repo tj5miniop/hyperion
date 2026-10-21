@@ -21,7 +21,7 @@
 ## Available Images
 After careful consideration, only 3 images are being shipped 
 
-- Hyperion: Bazzite KDE shipped with the NVIDIA-OPEN - aimed to include the same features with my own additions. 
+- Hyperion: Bazzite KDE shipped with the NVIDIA-OPEN - aimed to include the same features with my own additions. (NOT BEING BUILT ANYMORE UNTIL FURTHER NOTICE) 
 - Hypeiron-GNOME: Hyperion, based on Bluefin by Universal Blue. DOES NOT SHIP WITH THE NVIDIA DRIVERS.
 
 ### EXPERIMENTAL IMAGES 
