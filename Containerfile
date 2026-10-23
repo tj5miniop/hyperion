@@ -4,7 +4,7 @@
 ARG FEDORA_VERSION="${FEDORA_VERSION:-44}"
 ARG ARCH="${ARCH:-x86_64}"
 ARG BASE_IMAGE_KDE_NV="${BASE_IMAGE_KDE_NV:-ghcr.io/ublue-os/bazzite-nvidia-open:latest}"
-ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/bazzite:latest"
+ARG BASE_IMAGE_KDE="${BASE_IMAGE_KDE:-ghcr.io/ublue-os/bazzite:latest}"
 ARG BASE_IMAGE_UTAH="${BASE_IMAGE_UTAH:-ghcr.io/projectbluefin/utah-nvidia-gaming:testing}"
 
 # ==============================================================================
