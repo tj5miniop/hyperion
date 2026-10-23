@@ -29,6 +29,10 @@ jobs:
       matrix:
         include:
           # Main Images
+          - image_flavour: main
+            image_suffix: ""
+            containerfile_target: hyperion
+            rechunk: false
           - image_flavour: gnome
             image_suffix: "-gnome"
             containerfile_target: hyperion-gnome
